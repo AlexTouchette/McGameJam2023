@@ -5,7 +5,6 @@ using UnityEngine;
 public enum CardType
 {
     Water,
-    Gourd,
     JungleMove
 }
 public struct CardData

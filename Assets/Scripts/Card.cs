@@ -1,13 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Card : MonoBehaviour
+public class Card : MonoBehaviour, IPointerDownHandler
 {
-    public Vector2 dest;
-    public bool deleteOnEnd;
+    [HideInInspector] public Vector2 dest;
+    [HideInInspector] public bool deleteOnEnd;
+    [HideInInspector] public bool buyable = false;
+    [HideInInspector] public CardData cardData;
 
-    CardData cardData;
+    [SerializeField]
+    static public int cardHeight = 230;
+
+    [SerializeField]
+    static public int cardWidth = 150;
+
+    
     Vector2 start;
     RectTransform rt;
     float lerpTime;
@@ -17,11 +26,15 @@ public class Card : MonoBehaviour
     {
         rt = GetComponent<RectTransform>();
         start = rt.anchoredPosition;
+
+        rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, cardWidth);
+        rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, cardHeight);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (buyable) return;
         if (rt.anchoredPosition != dest)
         {
             lerpTime += Time.deltaTime;
@@ -50,5 +63,8 @@ public class Card : MonoBehaviour
         transform.Find("Description").GetComponent<TMPro.TextMeshProUGUI>().text = cardData.description;
     }
 
-
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (buyable) GameObject.Find("CardShop").GetComponent<CardShop>().BuyCard(gameObject);
+    }
 }

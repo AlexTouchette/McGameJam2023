@@ -12,11 +12,8 @@ public class DeckManager : MonoBehaviour
     [SerializeField]
     int handSize;
 
-    [SerializeField]
-    int cardHeight;
-
-    [SerializeField]
-    int cardWidth;
+    [SerializeField] 
+    CardShop cardShop;
 
     Dictionary<CardType, CardData> possibleCards = new Dictionary<CardType, CardData>();
 
@@ -25,12 +22,19 @@ public class DeckManager : MonoBehaviour
     List<CardData> hand = new List<CardData>();
     List<CardData> discardPile = new List<CardData>();
 
+    TMPro.TextMeshProUGUI drawPileCount;
+    TMPro.TextMeshProUGUI discardPileCount;
+
     // Start is called before the first frame update
     void Start()
     {
+        drawPileCount = GameObject.Find("DrawCardCount").GetComponent<TMPro.TextMeshProUGUI>();
+        discardPileCount = GameObject.Find("DiscardCardCount").GetComponent<TMPro.TextMeshProUGUI>();
+
         // This is a game jam lord please forgive me
         possibleCards.Add(CardType.Water, new CardData() 
         { 
+            cardType = CardType.Water,
             title = "Water", 
             description = "You found water. Congratulations you won't die of dehydration (maybe dysentry though)"
         }
@@ -38,6 +42,7 @@ public class DeckManager : MonoBehaviour
 
         possibleCards.Add(CardType.JungleMove, new CardData()
         {
+            cardType = CardType.JungleMove,
             title = "Hack and slash",
             description = "Move through a jungle space. So many vines."
         }
@@ -87,10 +92,6 @@ public class DeckManager : MonoBehaviour
 
         int nbOfCardsToDraw = Math.Min(handSize, drawPile.Count);
         List<CardData> cardsToDraw = drawPile.GetRange(drawPile.Count - nbOfCardsToDraw, nbOfCardsToDraw);
-        for(int i = 0; i < cardsToDraw.Count; i++)
-        {
-            Debug.Log(cardsToDraw[i].title);
-        }
         drawPile.RemoveRange(drawPile.Count - nbOfCardsToDraw, nbOfCardsToDraw);
 
         Vector2 handCentre = GameObject.Find("HandCentre").transform.localPosition;
@@ -102,7 +103,7 @@ public class DeckManager : MonoBehaviour
 
     IEnumerator DrawCards(float time, int nbOfCardsToDraw, List<CardData> cardsToDraw, Vector2 handCentre)
     {
-        float initialXCardPos = handCentre.x - (float)nbOfCardsToDraw / 2 * cardWidth + (float)cardWidth / 2;
+        float initialXCardPos = handCentre.x - (float)nbOfCardsToDraw / 2 * Card.cardWidth + (float)Card.cardWidth / 2;
 
         for (int i = 0; i < nbOfCardsToDraw; i++)
         {
@@ -113,12 +114,30 @@ public class DeckManager : MonoBehaviour
 
             RectTransform rt = card.GetComponent<RectTransform>();
             rt.anchoredPosition = GameObject.Find("DrawPile").transform.localPosition;
-            card.GetComponent<Card>().dest = new Vector2(initialXCardPos + i * cardWidth, handCentre.y);
-
-            rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, cardWidth);
-            rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, cardHeight);
+            card.GetComponent<Card>().dest = new Vector2(initialXCardPos + i * Card.cardWidth, handCentre.y);
         }
 
         cardsToDraw.Clear();
+    }
+
+    public CardData GetRandomCard(List<CardType> excludedTypes)
+    {
+        List<CardType> cardTypes = Enum.GetValues(typeof(CardType)).OfType<CardType>().ToList();
+        IEnumerable<CardType> common = cardTypes.Intersect(excludedTypes).ToList();
+        cardTypes.RemoveAll(cardType => common.Contains(cardType));
+        CardType cardType = cardTypes[UnityEngine.Random.Range(0, cardTypes.Count)];
+        return possibleCards[cardType];
+    }
+
+    public void AddCardToDiscard(Card card)
+    {
+        discardPile.Add(card.cardData);
+        discardPileCount.text = discardPile.Count.ToString();
+    }
+
+    public void ShowShop()
+    {
+        cardShop.gameObject.SetActive(true);
+        cardShop.GenerateNewCards(2);
     }
 }

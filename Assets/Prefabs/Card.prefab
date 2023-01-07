@@ -92,6 +92,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 715c82239bb9fb849a2cfc37844a3100, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dest: {x: 0, y: 0}
+  deleteOnEnd: 0
+  buyable: 0
+  cardHeight: 230
+  cardWidth: 150
 --- !u!1 &4328446214061295328
 GameObject:
   m_ObjectHideFlags: 0
