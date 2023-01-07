@@ -12,6 +12,12 @@ public class DeckManager : MonoBehaviour
     [SerializeField]
     int handSize;
 
+    [SerializeField]
+    int cardHeight;
+
+    [SerializeField]
+    int cardWidth;
+
     Dictionary<CardType, CardData> possibleCards = new Dictionary<CardType, CardData>();
 
     // TODO: stacks?
@@ -41,10 +47,10 @@ public class DeckManager : MonoBehaviour
         for(int i = 0; i < 8; i++)
             discardPile.Add(possibleCards[CardType.Water]);
 
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 4; i++)
             discardPile.Add(possibleCards[CardType.JungleMove]);
 
-        Shuffle();
+        Draw();
     }
 
     // Update is called once per frame
@@ -65,9 +71,13 @@ public class DeckManager : MonoBehaviour
         GameObject[] instantiatedCards = GameObject.FindGameObjectsWithTag("Card");
 
         for (int i = 0; i < instantiatedCards.Length; i++)
-            Destroy(instantiatedCards[i]);
+        {
+            Card card = instantiatedCards[i].GetComponent<Card>();
+            card.dest = GameObject.Find("DiscardPile").transform.localPosition;
+            card.deleteOnEnd = true;
+        }
 
-        for(int i = 0; i < hand.Count; i++)
+        for (int i = 0; i < hand.Count; i++)
         {
             discardPile.Add(hand[i]);
         }
@@ -83,22 +93,32 @@ public class DeckManager : MonoBehaviour
         }
         drawPile.RemoveRange(drawPile.Count - nbOfCardsToDraw, nbOfCardsToDraw);
 
-        //Vector2 handCentre = GameObject.Find("HandCentre").transform.position;
-        //float initialXCardPos = handCentre.x - (float) nbOfCardsToDraw / 2 * cardWidth;
-        //Debug.Log(initialXCardPos);
-
-        for (int i = 0; i < cardsToDraw.Count; i++)
-        {
-            GameObject card = Instantiate(cardPrefab, GameObject.Find("Hand").transform);
-            card.GetComponent<Card>().SetCardData(cardsToDraw[i]);
-            hand.Add(cardsToDraw[i]);
-
-            card.GetComponent<RectTransform>().sizeDelta = new Vector2(150, 230);
-        }
-
-        cardsToDraw.Clear();
+        Vector2 handCentre = GameObject.Find("HandCentre").transform.localPosition;
+        StartCoroutine(DrawCards(0.2f, nbOfCardsToDraw, cardsToDraw, handCentre));
 
         GameObject.Find("DrawCardCount").GetComponent<TMPro.TextMeshProUGUI>().text = drawPile.Count.ToString();
         GameObject.Find("DiscardCardCount").GetComponent<TMPro.TextMeshProUGUI>().text = discardPile.Count.ToString();
+    }
+
+    IEnumerator DrawCards(float time, int nbOfCardsToDraw, List<CardData> cardsToDraw, Vector2 handCentre)
+    {
+        float initialXCardPos = handCentre.x - (float)nbOfCardsToDraw / 2 * cardWidth + (float)cardWidth / 2;
+
+        for (int i = 0; i < nbOfCardsToDraw; i++)
+        {
+            yield return new WaitForSeconds(time);
+            GameObject card = Instantiate(cardPrefab, GameObject.Find("UI").transform);
+            card.GetComponent<Card>().SetCardData(cardsToDraw[i]);
+            hand.Add(cardsToDraw[i]);
+
+            RectTransform rt = card.GetComponent<RectTransform>();
+            rt.anchoredPosition = GameObject.Find("DrawPile").transform.localPosition;
+            card.GetComponent<Card>().dest = new Vector2(initialXCardPos + i * cardWidth, handCentre.y);
+
+            rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, cardWidth);
+            rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, cardHeight);
+        }
+
+        cardsToDraw.Clear();
     }
 }
