@@ -12,7 +12,7 @@ public class BiomePreset : ScriptableObject
     public float minHeat;
 
     // returns a random sprite
-    public Sprite GetTleSprite ()
+    public Sprite GetTileSprite ()
     {
         return tiles[Random.Range(0, tiles.Length)];
     }

@@ -1,16 +1,18 @@
-﻿    using System.Collections;
+﻿    using System;
+    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+    using UnityEngine.Tilemaps;
 
-public class Map : MonoBehaviour
+    public class Map : MonoBehaviour
 {
     public BiomePreset[] biomes;
     public GameObject tilePrefab;
     public Transform parent;
 
     [Header("Dimensions")]
-    public int width = 50;
-    public int height = 50;
+    public int width = 100;
+    public int height = 100;
     public float scale = 1.0f;
     public Vector2 offset;
 
@@ -31,12 +33,21 @@ public class Map : MonoBehaviour
 
     private float last;
 
-    void Start ()
+    public Tilemap tilemap;
+    
+    [SerializeField] private Tile DesertTile = null;
+    [SerializeField] private Tile ForestTile = null;
+    [SerializeField] private Tile GrasslandTile = null;
+    [SerializeField] private Tile JungleTile = null;
+    [SerializeField] private Tile MountainsTile = null;
+    [SerializeField] private Tile OceanTile = null;
+    [SerializeField] private Tile TundraTile = null;
+
+    private void Start()
     {
-        GenerateMap();
     }
 
-    void GenerateMap ()
+    public void GenerateMap ()
     {
         // height map
         heightMap = NoiseGenerator.Generate(width, height, scale, heightWaves, offset);
@@ -46,16 +57,41 @@ public class Map : MonoBehaviour
 
         // heat map
         heatMap = NoiseGenerator.Generate(width, height, scale, heatWaves, offset);
-
-        int i = 0;
+        
         Color[] pixels = new Color[width * height];
 
         for(int x = 0; x < width; ++x)
         {
             for(int y = 0; y < height; ++y)
             {
-                GameObject tile = Instantiate(tilePrefab, new Vector3(x, y, 0), Quaternion.identity, parent);
-                tile.GetComponent<SpriteRenderer>().sprite = GetBiome(heightMap[x, y], moistureMap[x, y], heatMap[x, y]).GetTleSprite();
+                Vector3Int tilePosition = new Vector3Int(x, y, 0);
+                switch (GetBiome(heightMap[x, y], moistureMap[x, y], heatMap[x, y]).name)
+                {
+                    case "Desert":
+                        tilemap.SetTile(tilePosition, DesertTile);
+                        break;
+                    case "Mountains":
+                        tilemap.SetTile(tilePosition, MountainsTile);
+                        break;
+                    case "Ocean":
+                        tilemap.SetTile(tilePosition, OceanTile);
+                        break;
+                    case "Grassland":
+                        tilemap.SetTile(tilePosition, GrasslandTile);
+                        break;
+                    case "Forest":
+                        tilemap.SetTile(tilePosition, ForestTile);
+                        break;
+                    case "Jungle":
+                        tilemap.SetTile(tilePosition, JungleTile);
+                        break;
+                    case "Tundra":
+                        tilemap.SetTile(tilePosition, TundraTile);
+                        break;
+                    default:
+                        break;
+                }
+                //tile.GetComponent<SpriteRenderer>().sprite = GetBiome(heightMap[x, y], moistureMap[x, y], heatMap[x, y]).GetTleSprite();
             }
         }
     }
@@ -109,7 +145,7 @@ public class Map : MonoBehaviour
 
         if(biomeToReturn == null)
             biomeToReturn = biomes[0];
-
+        Debug.Log(biomeToReturn);
         return biomeToReturn;
     }
 }
