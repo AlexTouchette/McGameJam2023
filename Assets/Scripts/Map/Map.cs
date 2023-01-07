@@ -158,7 +158,6 @@ using UnityEngine;
 
         if(biomeToReturn == null)
             biomeToReturn = biomes[0];
-        Debug.Log(biomeToReturn);
         return biomeToReturn;
     }
 }
