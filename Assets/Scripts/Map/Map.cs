@@ -34,6 +34,7 @@ using UnityEngine;
     private float last;
 
     public Tilemap tilemap;
+    public Tilemap borderTilemap;
     
     [SerializeField] private Tile DesertTile = null;
     [SerializeField] private Tile ForestTile = null;
@@ -42,6 +43,7 @@ using UnityEngine;
     [SerializeField] private Tile MountainsTile = null;
     [SerializeField] private Tile OceanTile = null;
     [SerializeField] private Tile TundraTile = null;
+    [SerializeField] private Tile BorderTile = null;
 
     private void Start()
     {
@@ -91,7 +93,18 @@ using UnityEngine;
                     default:
                         break;
                 }
-                //tile.GetComponent<SpriteRenderer>().sprite = GetBiome(heightMap[x, y], moistureMap[x, y], heatMap[x, y]).GetTleSprite();
+            }
+        }
+
+        for (int x = 0 - 15; x < width + 15; x++)
+        {
+            for (int y = 0 - 15; y < height + 15; y++)
+            {
+                if (x < 0 || y < 0 || x >= width || y >= height)
+                {
+                    Vector3Int tilePosition = new Vector3Int(x, y, 0);
+                    borderTilemap.SetTile(tilePosition, BorderTile);
+                } 
             }
         }
     }
