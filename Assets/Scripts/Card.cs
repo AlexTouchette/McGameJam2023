@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Card : MonoBehaviour, IPointerDownHandler
 {
@@ -70,6 +71,7 @@ public class Card : MonoBehaviour, IPointerDownHandler
         this.cardData = cardData;
         transform.Find("Title").GetComponent<TMPro.TextMeshProUGUI>().text = cardData.title;
         transform.Find("Description").GetComponent<TMPro.TextMeshProUGUI>().text = cardData.description;
+        transform.Find("CardImage").GetComponent<Image>().sprite = cardData.image;
     }
 
     public void Fade()

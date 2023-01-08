@@ -1891,6 +1891,7 @@ MonoBehaviour:
   cardPrefab: {fileID: 4328446214035302764, guid: bd453e7ef2b2f5e4895adc5622eb7f51, type: 3}
   handSize: 5
   cardShop: {fileID: 1476485069}
+  waterImage: {fileID: 21300000, guid: d92069919dc2a5a4f920d7f633df0fff, type: 3}
   LootTileMap: {fileID: 1503913571}
 --- !u!4 &736325031
 Transform:

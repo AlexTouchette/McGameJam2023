@@ -4,6 +4,7 @@ using System.Linq;
 using System;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class DeckManager : MonoBehaviour
 {
@@ -30,6 +31,8 @@ public class DeckManager : MonoBehaviour
     TMPro.TextMeshProUGUI mountainsMovementPointsText;
     TMPro.TextMeshProUGUI desertMovementPointsText;
 
+    public Sprite waterImage;
+
     public Tilemap LootTileMap;
     private TileManager m_Tm;
     private GameManager m_Gm;
@@ -50,20 +53,21 @@ public class DeckManager : MonoBehaviour
         mountainsMovementPointsText = GameObject.Find("MountainsMovementText").GetComponent<TMPro.TextMeshProUGUI>();
         desertMovementPointsText = GameObject.Find("DesertMovementText").GetComponent<TMPro.TextMeshProUGUI>();
 
+        m_Tm = GameObject.Find("Grid").GetComponent<TileManager>();
+        m_Gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        
         // This is a game jam lord please forgive me
         possibleCards.Add(CardType.Water, new CardData()
         {
             cardType = CardType.Water,
             title = "Water",
             description = "You found water. Congratulations you won't die of dehydration (maybe dysentry though)",
+            image = waterImage,
             numToCraft = 0,
             itemType = ItemType.None
         }
         );
-
-        m_Tm = GameObject.Find("Grid").GetComponent<TileManager>();
-        m_Gm = GameObject.Find("GameManager").GetComponent<GameManager>();
-            
+        
         possibleCards.Add(CardType.JungleMove, new CardData()
         {
             cardType = CardType.JungleMove,
