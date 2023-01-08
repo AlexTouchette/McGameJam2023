@@ -8,7 +8,6 @@ using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
-    private Map map;
     private Tilemap LootTilemap;
     public Tile Loots;
 
@@ -22,8 +21,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         lootsAmount = 50;
-        map = GameObject.Find("Map").GetComponent<Map>();
-        map.GenerateMap();
 
         m_Tm = GameObject.Find("Grid").GetComponent<TileManager>();
         m_Dm = GameObject.Find("DeckManager").GetComponent<DeckManager>();

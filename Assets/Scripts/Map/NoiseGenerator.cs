@@ -26,10 +26,10 @@ public class NoiseGenerator : MonoBehaviour
                 {
                     // sample the perlin noise taking into consideration amplitude and frequency
                     
-                    noiseMap[x, y] += wave.amplitude * Mathf.PerlinNoise(samplePosX * wave.frequency + wave.seed, samplePosY * wave.frequency + wave.seed);
+                    //noiseMap[x, y] += wave.amplitude * Mathf.PerlinNoise(samplePosX * wave.frequency + wave.seed, samplePosY * wave.frequency + wave.seed);
                     
-                    //float seed = Random.Range(1, 100);
-                    //noiseMap[x, y] += wave.amplitude * Mathf.PerlinNoise(samplePosX * wave.frequency + seed, samplePosY * wave.frequency + seed);
+                    float seed = Random.Range(1, 100);
+                    noiseMap[x, y] += wave.amplitude * Mathf.PerlinNoise(samplePosX * wave.frequency + seed, samplePosY * wave.frequency + seed);
                     normalization += wave.amplitude;
                 }
 

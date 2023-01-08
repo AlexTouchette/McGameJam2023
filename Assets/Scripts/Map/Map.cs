@@ -44,6 +44,7 @@ using UnityEngine;
 
     private void Start()
     {
+        GenerateMap();
     }
 
     public void GenerateMap ()
