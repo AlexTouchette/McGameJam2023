@@ -86,10 +86,10 @@ public class TileManager : MonoBehaviour
             m_Animator.SetFloat("Speed", 1);
         }
         
-        for (int i = 0; i < 100; i ++)
+        for (int i = 0; i < 50; i ++)
         {
-            m_Player.transform.Translate(direction.x * 0.01f, direction.y * 0.01f, direction.z);
-            yield return new WaitForSeconds(0.01f);
+            m_Player.transform.Translate(direction.x * 0.02f, direction.y * 0.02f, direction.z);
+            yield return new WaitForSeconds(0.008f);
         }
         
         m_Animator.SetFloat("Horizontal", 0);
