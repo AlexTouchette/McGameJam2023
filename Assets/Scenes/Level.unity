@@ -1304,6 +1304,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 379053176}
   m_CullTransparentMesh: 1
+--- !u!1 &415418403
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 415418404}
+  m_Layer: 0
+  m_Name: Placeholder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &415418404
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 415418403}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 49.5, y: 48.875, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 77740892}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &432439688
 GameObject:
   m_ObjectHideFlags: 0
@@ -1488,7 +1520,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 415418404}
     m_Modifications:
     - target: {fileID: 292117028116325907, guid: c2febe0e37291ba45a4c47d1ba90fea4, type: 3}
       propertyPath: moveSpeed
@@ -1516,11 +1548,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4380075995267117180, guid: c2febe0e37291ba45a4c47d1ba90fea4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 49.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4380075995267117180, guid: c2febe0e37291ba45a4c47d1ba90fea4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 48.875
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4380075995267117180, guid: c2febe0e37291ba45a4c47d1ba90fea4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1532,15 +1564,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4380075995267117180, guid: c2febe0e37291ba45a4c47d1ba90fea4, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4380075995267117180, guid: c2febe0e37291ba45a4c47d1ba90fea4, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4380075995267117180, guid: c2febe0e37291ba45a4c47d1ba90fea4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4380075995267117180, guid: c2febe0e37291ba45a4c47d1ba90fea4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2102,8 +2134,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cf2cd41daac92cb4b9bf95eb7a237c7c, type: 2}
   tilemap: {fileID: 1874310099}
   borderTilemap: {fileID: 1250942813}
-  lootsAmount: 100
-  DeathScreen: {fileID: 776165982}
+  lootsAmount: 300
 --- !u!4 &685043589
 Transform:
   m_ObjectHideFlags: 0
@@ -2160,6 +2191,7 @@ MonoBehaviour:
   carImage: {fileID: 1241868194, guid: 57865addd1ed5ee49a30c75f28bdbe8c, type: 3}
   adrenalineImage: {fileID: -275112250, guid: fb0f326bf979ccd4ba3b94eb506f2047, type: 3}
   LootTileMap: {fileID: 1503913571}
+  nbOfTurns: 0
 --- !u!4 &736325031
 Transform:
   m_ObjectHideFlags: 0
@@ -3021,7 +3053,7 @@ GameObject:
   - component: {fileID: 1067877881}
   - component: {fileID: 1067877880}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: WinText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
