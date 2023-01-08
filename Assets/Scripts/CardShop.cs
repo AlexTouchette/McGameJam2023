@@ -43,7 +43,7 @@ public class CardShop : MonoBehaviour
         }
         for(int i = 0; i < nbOfCards; i++)
         {
-            float initialXCardPos = rt.rect.center.x - (float)nbOfCards / 2 * Card.cardWidth + (float)Card.cardWidth / 2;
+            float initialXCardPos = rt.rect.center.x - ((float)nbOfCards + (float)heldCraftable.Count) / 2 * Card.cardWidth + (float)Card.cardWidth / 2;
             GameObject cardObject = Instantiate(cardPrefab, transform);
             Card card = cardObject.GetComponent<Card>();
 

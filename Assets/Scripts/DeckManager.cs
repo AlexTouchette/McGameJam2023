@@ -131,7 +131,7 @@ public class DeckManager : MonoBehaviour
         possibleCards.Add(CardType.Adrenaline, new CardData()
         {
             cardType = CardType.Adrenaline,
-            title = "Car",
+            title = "Adrenaline",
             description = "Draw 2 more card per turn. Draw 3 to craft",
             numToCraft = 3,
             itemType = ItemType.Adrenaline
