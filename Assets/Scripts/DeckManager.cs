@@ -34,7 +34,7 @@ public class DeckManager : MonoBehaviour
     private TileManager m_Tm;
     private GameManager m_Gm;
 
-    ItemState itemState = new ItemState();
+    public ItemState itemState = new ItemState();
 
     // Start is called before the first frame update
     void Start()
@@ -98,29 +98,53 @@ public class DeckManager : MonoBehaviour
         {
             cardType = CardType.Gourd,
             title = "Gourd",
-            description = "Holds 1 water when you draw in excess",
-            numToCraft = 3,
+            description = "Holds 1 water when you draw more than 1 water. Draw 3 to craft.",
+            numToCraft = 2,
             itemType = ItemType.Gourd
         }
         );
 
-        
+        possibleCards.Add(CardType.Plane, new CardData()
+        {
+            cardType = CardType.Plane,
+            title = "Plane",
+            description = "You win if you craft the plane. Draw 5 to craft",
+            numToCraft = 5,
+            itemType = ItemType.Plane
+        }
+        );
+
+        possibleCards.Add(CardType.Car, new CardData()
+        {
+            cardType = CardType.Car,
+            title = "Car",
+            description = "The car lets you move 3 spaces in any terrain type. Draw 3 to craft",
+            numToCraft = 3,
+            itemType = ItemType.Car
+        }
+        );
 
         // Create initial deck
-        for (int i = 0; i < 10; i++)
-            discardPile.Add(possibleCards[CardType.Gourd]);
+        //for (int i = 0; i < 10; i++)
+        //    discardPile.Add(possibleCards[CardType.Gourd]);
 
-        for (int i = 0; i < 3; i++)
-            discardPile.Add(possibleCards[CardType.JungleMove]);
+        //for (int i = 0; i < 3; i++)
+        //    discardPile.Add(possibleCards[CardType.JungleMove]);
 
-        for (int i = 0; i < 3; i++)
-            discardPile.Add(possibleCards[CardType.MountainMove]);
+        //for (int i = 0; i < 3; i++)
+        //    discardPile.Add(possibleCards[CardType.MountainMove]);
 
-        for (int i = 0; i < 3; i++)
-            discardPile.Add(possibleCards[CardType.DesertMove]);
+        //for (int i = 0; i < 3; i++)
+        //    discardPile.Add(possibleCards[CardType.DesertMove]);
 
         for (int i = 0; i < 5; i++)
             discardPile.Add(possibleCards[CardType.Water]);
+
+        //for (int i = 0; i < 5; i++)
+        //    discardPile.Add(possibleCards[CardType.Plane]);
+
+        for (int i = 0; i < 5; i++)
+            discardPile.Add(possibleCards[CardType.Car]);
 
         Draw();
     }
@@ -148,6 +172,8 @@ public class DeckManager : MonoBehaviour
         movementPoints["JungleTile"] = 0;
 
         GameObject[] instantiatedCards = GameObject.FindGameObjectsWithTag("Card");
+
+        itemState.RefillCar();
 
         for (int i = 0; i < instantiatedCards.Length; i++)
         {
