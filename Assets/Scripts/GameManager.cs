@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
     {
         m_MaxHP = 10;
         m_HealthPoints = m_MaxHP;
-        
+
         healthSlider = GameObject.Find("HealthBar").GetComponent<Slider>();
         
         m_Tm = GameObject.Find("Grid").GetComponent<TileManager>();
@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviour
                 int x = Random.Range(0, 99);
                 int y = Random.Range(0, 99);
                 Vector3Int position = new Vector3Int(x, y, 0);
-                if (LootTilemap.GetTile(position) == null)
+                if (LootTilemap.GetTile(position) == null && m_Tm.grid.WorldToCell(position) != m_Tm.grid.WorldToCell(m_Tm.CurrentPosition))
                 {
                     LootTilemap.SetTile(position, Loots);
                     isAssigned = true;

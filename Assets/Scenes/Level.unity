@@ -2038,6 +2038,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 983fd3c02f8a11b4d8c5638dbf659741, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grid: {fileID: 0}
   interactiveMap: {fileID: 1101678483}
   hoverTile: {fileID: 11400000, guid: bb0e9bd24253d414c92a73d71b90a4fc, type: 2}
   CurrentPosition: {x: 0, y: 0, z: 0}
@@ -2223,7 +2224,7 @@ MonoBehaviour:
   tilemap: {fileID: 1874310099}
   borderTilemap: {fileID: 1250942813}
   lootsAmount: 300
-  DeathScreen: {fileID: 0}
+  DeathScreen: {fileID: 776165982}
 --- !u!4 &685043589
 Transform:
   m_ObjectHideFlags: 0

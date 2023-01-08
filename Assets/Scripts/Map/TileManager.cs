@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 public class TileManager : MonoBehaviour
 {
-    private Grid grid;
+    public Grid grid;
     [SerializeField] private Tilemap interactiveMap = null;
     [SerializeField] private Tile hoverTile = null;
 
