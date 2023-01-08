@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
@@ -50,11 +51,14 @@ public class GameManager : MonoBehaviour
     public Tilemap borderTilemap;
 
     public int lootsAmount;
+
+    private int m_HealthPoints;
     // Start is called before the first frame update
     void Start()
     {
         lootsAmount = 50;
-
+        m_HealthPoints = 10;
+        
         m_Tm = GameObject.Find("Grid").GetComponent<TileManager>();
         m_Dm = GameObject.Find("DeckManager").GetComponent<DeckManager>();
         GenerateMap();
@@ -192,5 +196,19 @@ public class GameManager : MonoBehaviour
         {
             return (height - biome.minHeight) + (moisture - biome.minMoisture) + (heat - biome.minHeat);
         }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        m_HealthPoints -= damage;
+        if (m_HealthPoints <= 0)
+        {
+            Death();
+        }
+    }
+
+    public void Death()
+    {
+        SceneManager.LoadScene("Level");
     }
 }

@@ -32,6 +32,7 @@ public class DeckManager : MonoBehaviour
 
     public Tilemap LootTileMap;
     private TileManager m_Tm;
+    private GameManager m_Gm;
 
     ItemState itemState = new ItemState();
 
@@ -61,6 +62,7 @@ public class DeckManager : MonoBehaviour
         );
 
         m_Tm = GameObject.Find("Grid").GetComponent<TileManager>();
+        m_Gm = GameObject.Find("GameManager").GetComponent<GameManager>();
             
         possibleCards.Add(CardType.JungleMove, new CardData()
         {
@@ -167,7 +169,8 @@ public class DeckManager : MonoBehaviour
         int nbOfCardsToDraw = Math.Min(handSize, handSize - hand.Count);
         hand = hand.Concat(drawPile.GetRange(drawPile.Count - nbOfCardsToDraw, nbOfCardsToDraw)).ToList();
         drawPile.RemoveRange(drawPile.Count - nbOfCardsToDraw, nbOfCardsToDraw);
-
+        CheckMovementDamage();
+        
         Vector2 handCentre = GameObject.Find("HandCentre").transform.localPosition;
         CalculateMovementPoints();
 
@@ -177,6 +180,23 @@ public class DeckManager : MonoBehaviour
         discardPileCount.text = discardPile.Count.ToString();
     }
 
+    void CheckMovementDamage()
+    {
+        bool hasWater = false;
+        foreach (CardData card in hand)
+        {
+            if (card.cardType == CardType.Water)
+            {
+                hasWater = true;
+            }
+        }
+
+        if (!hasWater)
+        {
+            m_Gm.TakeDamage(1);
+        }
+    }
+    
     void CalculateMovementPoints()
     {
         foreach(CardData cardData in hand)
