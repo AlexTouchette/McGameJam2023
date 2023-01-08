@@ -31,8 +31,8 @@ public class AudioManager : MonoBehaviour
             wavesIsPlaying = true;
             desertIsPlaying = false;
         }
-        else if(((m_Tm.CurrentPosition.x > 10 && m_Tm.CurrentPosition.x < 89) || (m_Tm.CurrentPosition.y > 10 
-                 && m_Tm.CurrentPosition.y < 89)) && !desertIsPlaying)
+        else if(m_Tm.CurrentPosition.x > 10 && m_Tm.CurrentPosition.x < 89 && m_Tm.CurrentPosition.y > 10 
+                && m_Tm.CurrentPosition.y < 89 && !desertIsPlaying)
         {
             desert.Play();
             waves.Stop();
