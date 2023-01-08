@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Tilemaps;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class TileManager : MonoBehaviour
 {
@@ -59,7 +60,7 @@ public class TileManager : MonoBehaviour
         }
         
         // Left mouse click -> move to tile
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
         {
             if (!m_IsMoving)
             {
@@ -67,7 +68,6 @@ public class TileManager : MonoBehaviour
                 CurrentPosition = m_HighlightedTile + new Vector3(0.5f, 0.875f, 0);
                 StartCoroutine(Move(m_Player.transform.position, CurrentPosition));
             }
-                
         }
     }
     
