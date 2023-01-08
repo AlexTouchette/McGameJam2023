@@ -54,13 +54,18 @@ public class GameManager : MonoBehaviour
     public int lootsAmount;
 
     private float m_HealthPoints;
+    private float m_MaxHP;
 
     private Slider healthSlider;
+
+    
     // Start is called before the first frame update
     void Start()
     {
         lootsAmount = 50;
-        m_HealthPoints = 10;
+        m_MaxHP = 100;
+        m_HealthPoints = m_MaxHP;
+        
         healthSlider = GameObject.Find("HealthBar").GetComponent<Slider>();
         
         m_Tm = GameObject.Find("Grid").GetComponent<TileManager>();
@@ -208,14 +213,19 @@ public class GameManager : MonoBehaviour
         if (m_HealthPoints <= 0f)
         {
             Death();
-        } else if (m_HealthPoints >= 10f)
+        } else if (m_HealthPoints >= m_MaxHP)
         {
-            m_HealthPoints = 10.0f;
+            m_HealthPoints = m_MaxHP;
         }
-        healthSlider.value = m_HealthPoints / 10.0f;
+        healthSlider.value = m_HealthPoints / m_MaxHP;
     }
 
     public void Death()
+    {
+        SceneManager.LoadScene("Level");
+    }
+
+    public void PlayAgain()
     {
         SceneManager.LoadScene("Level");
     }

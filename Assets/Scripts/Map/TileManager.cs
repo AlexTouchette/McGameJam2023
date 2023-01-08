@@ -21,6 +21,7 @@ public class TileManager : MonoBehaviour
     DeckManager deckManager;
 
     private GameManager m_Gm;
+    public GameObject WinScreen;
 
     void Start() {
         deckManager = GameObject.Find("DeckManager").GetComponent<DeckManager>();
@@ -67,7 +68,7 @@ public class TileManager : MonoBehaviour
             string tileString = m_Gm.tilemap.GetTile(m_HighlightedTile).ToString().Split(" ")[0];
             if (!m_IsMoving)
             {
-                Debug.Log(tileString);
+                //Debug.Log(tileString);
                 // TODO: premi�re partie du OR � enlever quand il n'y aura que 3 bi�mes
                 if(!deckManager.movementPoints.ContainsKey(tileString) || deckManager.movementPoints[tileString] > 0)
                 {
@@ -78,6 +79,7 @@ public class TileManager : MonoBehaviour
                     }
                     CurrentPosition = m_HighlightedTile + new Vector3(0.5f, 0.875f, 0);
                     StartCoroutine(Move(m_Player.transform.position, CurrentPosition));
+                    CheckWin();
                 }
             }
         }
@@ -115,5 +117,14 @@ public class TileManager : MonoBehaviour
         m_Animator.SetFloat("Vertical", 0);
         m_Animator.SetFloat("Speed", 0);
         m_IsMoving = false;
+    }
+    
+    public void CheckWin()
+    {
+        if (CurrentPosition.x <= 1 || CurrentPosition.x >= 99 || CurrentPosition.y <= 1 ||
+            CurrentPosition.y >= 99)
+        {
+            WinScreen.SetActive(true);
+        }
     }
 }
