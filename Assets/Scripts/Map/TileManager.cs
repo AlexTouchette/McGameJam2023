@@ -67,6 +67,7 @@ public class TileManager : MonoBehaviour
             string tileString = m_Gm.tilemap.GetTile(m_HighlightedTile).ToString().Split(" ")[0];
             if (!m_IsMoving)
             {
+                Debug.Log(tileString);
                 // TODO: premi�re partie du OR � enlever quand il n'y aura que 3 bi�mes
                 if(!deckManager.movementPoints.ContainsKey(tileString) || deckManager.movementPoints[tileString] > 0)
                 {
