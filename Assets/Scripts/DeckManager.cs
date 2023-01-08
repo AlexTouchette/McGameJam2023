@@ -39,6 +39,8 @@ public class DeckManager : MonoBehaviour
 
     public ItemState itemState = new ItemState();
 
+    public int nbOfTurns = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -171,6 +173,8 @@ public class DeckManager : MonoBehaviour
     public void Draw()
     {
         if (cardShop.gameObject.activeSelf) return;
+
+        nbOfTurns++;
 
         movementPoints["MountainTile"] = 0;
         movementPoints["DesertTile"] = 0;
