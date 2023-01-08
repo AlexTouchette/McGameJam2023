@@ -12,12 +12,12 @@ public class TileManager : MonoBehaviour
 
     private Vector3Int previousMousePos = new Vector3Int();
 
-    private Vector3Int m_HighlightedTile; 
-    
+    private Vector3Int m_HighlightedTile;
+    public Vector3 CurrentPosition;
     private GameObject m_Player;
     private Animator m_Animator;
     private bool m_IsMoving;
-    
+
     void Start() {
         grid = gameObject.GetComponent<Grid>();
         m_Player = GameObject.Find("Player");
@@ -31,7 +31,7 @@ public class TileManager : MonoBehaviour
             interactiveMap.ClearAllTiles();
 
             Vector3 difference = mousePos - m_Player.transform.position;
-            if (difference.x != 0 || difference.y != 0)
+            if (!(difference.x == 0 && difference.y == 0))
             {
                 if (difference.x > 1.1)
                 {
@@ -59,8 +59,11 @@ public class TileManager : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             if (!m_IsMoving)
-                StartCoroutine(Move(m_Player.transform.position,
-                    m_HighlightedTile + new Vector3(0.5f, 0.875f, 0)));
+            {
+                CurrentPosition = m_HighlightedTile + new Vector3(0.5f, 0.875f, 0);
+                StartCoroutine(Move(m_Player.transform.position, CurrentPosition));
+            }
+                
         }
     }
     
