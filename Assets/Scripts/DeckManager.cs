@@ -149,12 +149,6 @@ public class DeckManager : MonoBehaviour
         Draw();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void Shuffle()
     {
         // TODO: validate this is truly random
