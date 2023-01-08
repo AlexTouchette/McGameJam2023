@@ -193,7 +193,7 @@ public class DeckManager : MonoBehaviour
 
         if (!hasWater)
         {
-            m_Gm.TakeDamage(1);
+            m_Gm.SetHealth(-1);
         }
     }
     

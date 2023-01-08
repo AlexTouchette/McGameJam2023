@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
@@ -42,7 +43,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Tile BorderTile = null;
     
     private DeckManager m_Dm;
-    
+
     public BiomePreset[] biomes;
 
     private float last;
@@ -52,12 +53,15 @@ public class GameManager : MonoBehaviour
 
     public int lootsAmount;
 
-    private int m_HealthPoints;
+    private float m_HealthPoints;
+
+    private Slider healthSlider;
     // Start is called before the first frame update
     void Start()
     {
         lootsAmount = 50;
         m_HealthPoints = 10;
+        healthSlider = GameObject.Find("HealthBar").GetComponent<Slider>();
         
         m_Tm = GameObject.Find("Grid").GetComponent<TileManager>();
         m_Dm = GameObject.Find("DeckManager").GetComponent<DeckManager>();
@@ -198,13 +202,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    public void SetHealth(int value)
     {
-        m_HealthPoints -= damage;
-        if (m_HealthPoints <= 0)
+        m_HealthPoints += value;
+        if (m_HealthPoints <= 0f)
         {
             Death();
+        } else if (m_HealthPoints >= 10f)
+        {
+            m_HealthPoints = 10.0f;
         }
+        healthSlider.value = m_HealthPoints / 10.0f;
     }
 
     public void Death()
