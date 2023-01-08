@@ -38,7 +38,8 @@ public class DeckManager : MonoBehaviour
             cardType = CardType.Water,
             title = "Water",
             description = "You found water. Congratulations you won't die of dehydration (maybe dysentry though)",
-            numToCraft = 0
+            numToCraft = 0,
+            itemType = ItemType.None
         }
         );
 
@@ -47,7 +48,8 @@ public class DeckManager : MonoBehaviour
             cardType = CardType.JungleMove,
             title = "Hack and slash",
             description = "Move through a jungle space. So many vines.",
-            numToCraft = 0
+            numToCraft = 0,
+            itemType = ItemType.None
         }
         );
 
@@ -187,7 +189,12 @@ public class DeckManager : MonoBehaviour
     public CardData GetRandomCard(List<CardType> excludedTypes)
     {
         List<CardType> cardTypes = Enum.GetValues(typeof(CardType)).OfType<CardType>().ToList();
-        IEnumerable<CardType> common = cardTypes.Intersect(excludedTypes).ToList();
+        List<CardType> common = cardTypes.Intersect(excludedTypes).ToList();
+
+        foreach(CardType ct in cardTypes)
+            if (itemState.isItemActive(possibleCards[ct].itemType) && !common.Contains(ct))
+                common.Add(ct);
+
         cardTypes.RemoveAll(cardType => common.Contains(cardType));
         CardType cardType = cardTypes[UnityEngine.Random.Range(0, cardTypes.Count)];
         return possibleCards[cardType];
