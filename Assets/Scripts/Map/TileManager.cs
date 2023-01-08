@@ -11,6 +11,8 @@ public class TileManager : MonoBehaviour
     [SerializeField] private Tile hoverTile = null;
 
     private Vector3Int previousMousePos = new Vector3Int();
+
+    private Vector3Int m_HighlightedTile; 
     
     private GameObject m_Player;
     private Animator m_Animator;
@@ -25,19 +27,40 @@ public class TileManager : MonoBehaviour
     void Update() {
         // Mouse over -> highlight tile
         Vector3Int mousePos = GetMousePosition();
-
         if (!mousePos.Equals(previousMousePos)) {
-            interactiveMap.SetTile(previousMousePos, null); // Remove old hoverTile
-            interactiveMap.SetTile(mousePos, hoverTile);
+            interactiveMap.ClearAllTiles();
+
+            Vector3 difference = mousePos - m_Player.transform.position;
+            if (difference.x != 0 || difference.y != 0)
+            {
+                if (difference.x > 1.1)
+                {
+                    difference.x = 1;
+                } else if (difference.x < -1.1)
+                {
+                    difference.x = -1;
+                }
+
+                if (difference.y > 1.1)
+                {
+                    difference.y = 1;
+                } else if (difference.y < -1.1)
+                {
+                    difference.y = -1;
+                }
+            }
+
+            m_HighlightedTile = Vector3Int.FloorToInt(m_Player.transform.position + difference);
+            interactiveMap.SetTile(m_HighlightedTile, hoverTile);
             previousMousePos = mousePos;
         }
         
         // Left mouse click -> move to tile
         if (Input.GetMouseButton(0))
         {
-            Vector3 destination = GetMousePosition() + new Vector3(0.5f, 0.875f, 0);
             if (!m_IsMoving)
-                StartCoroutine(Move(m_Player.transform.position, destination));
+                StartCoroutine(Move(m_Player.transform.position,
+                    m_HighlightedTile + new Vector3(0.5f, 0.875f, 0)));
         }
     }
     
@@ -52,8 +75,6 @@ public class TileManager : MonoBehaviour
         Vector3 direction = destination - currentPosition;
         float deltaX = Math.Abs(direction.x);
         float deltaY = Math.Abs(direction.y);
-        
-        Debug.Log(deltaX + " " + deltaY);
 
         if (deltaX > deltaY)
         {
@@ -65,10 +86,10 @@ public class TileManager : MonoBehaviour
             m_Animator.SetFloat("Speed", 1);
         }
         
-        for (int i = 0; i < 100; i ++)
+        for (int i = 0; i < 50; i ++)
         {
-            m_Player.transform.Translate(direction.x * 0.01f, direction.y * 0.01f, direction.z);
-            yield return new WaitForSeconds(0.01f);
+            m_Player.transform.Translate(direction.x * 0.02f, direction.y * 0.02f, direction.z);
+            yield return new WaitForSeconds(0.008f);
         }
         
         m_Animator.SetFloat("Horizontal", 0);
