@@ -17,13 +17,14 @@ public class DeckManager : MonoBehaviour
 
     Dictionary<CardType, CardData> possibleCards = new Dictionary<CardType, CardData>();
 
-    // TODO: stacks?
     List<CardData> drawPile = new List<CardData>();
     List<CardData> hand = new List<CardData>();
     List<CardData> discardPile = new List<CardData>();
 
     TMPro.TextMeshProUGUI drawPileCount;
     TMPro.TextMeshProUGUI discardPileCount;
+
+    ItemState itemState = new ItemState();
 
     // Start is called before the first frame update
     void Start()
@@ -32,11 +33,12 @@ public class DeckManager : MonoBehaviour
         discardPileCount = GameObject.Find("DiscardCardCount").GetComponent<TMPro.TextMeshProUGUI>();
 
         // This is a game jam lord please forgive me
-        possibleCards.Add(CardType.Water, new CardData() 
-        { 
+        possibleCards.Add(CardType.Water, new CardData()
+        {
             cardType = CardType.Water,
-            title = "Water", 
-            description = "You found water. Congratulations you won't die of dehydration (maybe dysentry though)"
+            title = "Water",
+            description = "You found water. Congratulations you won't die of dehydration (maybe dysentry though)",
+            numToCraft = 0
         }
         );
 
@@ -44,15 +46,26 @@ public class DeckManager : MonoBehaviour
         {
             cardType = CardType.JungleMove,
             title = "Hack and slash",
-            description = "Move through a jungle space. So many vines."
+            description = "Move through a jungle space. So many vines.",
+            numToCraft = 0
+        }
+        );
+
+        possibleCards.Add(CardType.Gourd, new CardData()
+        {
+            cardType = CardType.Gourd,
+            title = "Gourd",
+            description = "Holds 1 water when you draw in excess",
+            numToCraft = 3,
+            itemType = ItemType.Gourd
         }
         );
 
         // Create initial deck
-        for(int i = 0; i < 8; i++)
-            discardPile.Add(possibleCards[CardType.Water]);
+        for (int i = 0; i < 8; i++)
+            discardPile.Add(possibleCards[CardType.Gourd]);
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
             discardPile.Add(possibleCards[CardType.JungleMove]);
 
         Draw();
@@ -106,24 +119,69 @@ public class DeckManager : MonoBehaviour
         Vector2 handCentre = GameObject.Find("HandCentre").transform.localPosition;
         StartCoroutine(DrawCards(0.2f, hand, handCentre));
 
-        GameObject.Find("DrawCardCount").GetComponent<TMPro.TextMeshProUGUI>().text = drawPile.Count.ToString();
-        GameObject.Find("DiscardCardCount").GetComponent<TMPro.TextMeshProUGUI>().text = discardPile.Count.ToString();
+        drawPileCount.text = drawPile.Count.ToString();
+        discardPileCount.text = discardPile.Count.ToString();
+    }
+
+    List<CardData> CheckCraftedItems()
+    {
+        Dictionary<CardData, int> cardTypeCounts = new Dictionary<CardData, int>();
+        List<CardData> cardTypesToRemove = new List<CardData>();
+        foreach(CardData cardData in hand)
+        {
+            if (cardTypeCounts.ContainsKey(cardData))
+                cardTypeCounts[cardData]++;
+            else
+                cardTypeCounts.Add(cardData, 1);
+        }
+        foreach(var pair in cardTypeCounts)
+        {
+            if(pair.Key.numToCraft != 0 && pair.Value >= pair.Key.numToCraft)
+            {
+                while(hand.Contains(pair.Key))
+                    hand.Remove(pair.Key);
+                while (drawPile.Contains(pair.Key))
+                    drawPile.Remove(pair.Key);
+                while (discardPile.Contains(pair.Key))
+                    discardPile.Remove(pair.Key);
+                UpdateUICardCounts();
+
+                cardTypesToRemove.Add(pair.Key);
+                itemState.ActivateItem(pair.Key.itemType);
+            }
+        }
+        return cardTypesToRemove;
     }
 
     IEnumerator DrawCards(float time, List<CardData> cardsToDraw, Vector2 handCentre)
     {
         float initialXCardPos = handCentre.x - (float)cardsToDraw.Count / 2 * Card.cardWidth + (float)Card.cardWidth / 2;
+        List<Card> drawnCards = new List<Card>();
 
         for (int i = 0; i < cardsToDraw.Count; i++)
         {
             yield return new WaitForSeconds(time);
-            GameObject card = Instantiate(cardPrefab, GameObject.Find("UI").transform);
-            card.GetComponent<Card>().SetCardData(cardsToDraw[i]);
-
-            RectTransform rt = card.GetComponent<RectTransform>();
+            GameObject cardObject = Instantiate(cardPrefab, GameObject.Find("UI").transform);
+            Card card = cardObject.GetComponent<Card>();
+            card.SetCardData(cardsToDraw[i]);
+            drawnCards.Add(card);
+            RectTransform rt = cardObject.GetComponent<RectTransform>();
             rt.anchoredPosition = GameObject.Find("DrawPile").transform.localPosition;
-            card.GetComponent<Card>().dest = new Vector2(initialXCardPos + i * Card.cardWidth, handCentre.y);
+            cardObject.GetComponent<Card>().dest = new Vector2(initialXCardPos + i * Card.cardWidth, handCentre.y);
         }
+        yield return new WaitForSeconds(1);
+        List<CardData> cardsToRemove = CheckCraftedItems();
+        foreach(Card drawnCard in drawnCards)
+        {
+            if (cardsToRemove.Contains(drawnCard.cardData))
+                drawnCard.Fade();
+        }
+    }
+
+    void UpdateUICardCounts()
+    {
+        discardPileCount.text = discardPile.Count.ToString();
+        drawPileCount.text = drawPile.Count.ToString();
     }
 
     public CardData GetRandomCard(List<CardType> excludedTypes)
