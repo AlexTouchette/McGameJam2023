@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public enum ItemType
 {
+    None,
     Gourd
 }
 
@@ -26,5 +27,10 @@ public class ItemState
     {
         itemState[itemType] = true;
         GameObject.Find("GourdItem").GetComponent<Image>().color = new Color(255, 255, 255, 255);
+    }
+
+    public bool isItemActive(ItemType itemType)
+    {
+        return itemState.ContainsKey(itemType) ? itemState[itemType] : false;
     }
 }
