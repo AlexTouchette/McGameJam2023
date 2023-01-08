@@ -228,7 +228,7 @@ public class DeckManager : MonoBehaviour
 
         hand = new List<CardData>();
 
-        int realHandSize = itemState.isItemActive(ItemType.Adrenaline) ? handSize + 2 : handSize;
+        int realHandSize = itemState.isItemActive(ItemType.Adrenaline) ? handSize + 1 : handSize;
         if(realHandSize > drawPile.Count)
         {
             hand = drawPile.GetRange(0, drawPile.Count);
