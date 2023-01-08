@@ -39,7 +39,8 @@ public class DeckManager : MonoBehaviour
     public Sprite planeImage;
     public Sprite carImage;
     public Sprite adrenalineImage;
-    
+
+    bool firstDraw = true;
 
     public Tilemap LootTileMap;
     private TileManager m_Tm;
@@ -167,6 +168,9 @@ public class DeckManager : MonoBehaviour
         for (int i = 0; i < 1; i++)
             discardPile.Add(possibleCards[CardType.Water]);
 
+        for (int i = 0; i < 20; i++)
+            discardPile.Add(possibleCards[CardType.Adrenaline]);
+
         Draw();
     }
 
@@ -187,7 +191,8 @@ public class DeckManager : MonoBehaviour
 
     public void Draw()
     {
-        if (cardShop.gameObject.activeSelf) return;
+        if (cardShop.gameObject.activeSelf && !firstDraw) return;
+        if (firstDraw) firstDraw = false;
 
         nbOfTurns++;
 
