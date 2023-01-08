@@ -16,7 +16,7 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
         wavesIsPlaying = false;
-        desertIsPlaying = false;
+        desertIsPlaying = true;
         
         m_Tm = GameObject.Find("Grid").GetComponent<TileManager>();
     }
