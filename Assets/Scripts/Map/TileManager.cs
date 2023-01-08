@@ -31,6 +31,7 @@ public class TileManager : MonoBehaviour
         m_Animator = m_Player.GetComponent<Animator>();
         m_Gm = GameObject.Find("GameManager").GetComponent<GameManager>();
         m_Am = GameObject.Find("Audio").GetComponent<AudioManager>();
+        CurrentPosition = grid.WorldToCell(m_Player.transform.position);
     }
     
     void Update() {
@@ -70,9 +71,9 @@ public class TileManager : MonoBehaviour
             try
             {
                 string tileString = m_Gm.tilemap.GetTile(m_HighlightedTile).ToString().Split(" ")[0];
-            
-            
-                if (!m_IsMoving)
+                
+                
+                if (!m_IsMoving && grid.WorldToCell(CurrentPosition) != m_HighlightedTile)
                 {
                     //Debug.Log(tileString);
                     // TODO: premi�re partie du OR � enlever quand il n'y aura que 3 bi�mes
