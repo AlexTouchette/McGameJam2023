@@ -36,14 +36,14 @@ using UnityEngine;
     public Tilemap tilemap;
     public Tilemap borderTilemap;
     
-    [SerializeField] private Tile DesertTile = null;
-    [SerializeField] private Tile ForestTile = null;
-    [SerializeField] private Tile GrasslandTile = null;
-    [SerializeField] private Tile JungleTile = null;
-    [SerializeField] private Tile MountainsTile = null;
-    [SerializeField] private Tile OceanTile = null;
-    [SerializeField] private Tile TundraTile = null;
-    [SerializeField] private Tile BorderTile = null;
+    [SerializeField] public Tile DesertTile = null;
+    [SerializeField] public Tile ForestTile = null;
+    [SerializeField] public Tile GrasslandTile = null;
+    [SerializeField] public Tile JungleTile = null;
+    [SerializeField] public Tile MountainsTile = null;
+    [SerializeField] public Tile OceanTile = null;
+    [SerializeField] public Tile TundraTile = null;
+    [SerializeField] public Tile BorderTile = null;
 
     private void Start()
     {

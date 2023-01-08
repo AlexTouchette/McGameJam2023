@@ -12,6 +12,8 @@ public class TileManager : MonoBehaviour
 
     private Vector3Int previousMousePos = new Vector3Int();
 
+    private Map map;
+
     private Vector3Int m_HighlightedTile;
     public Vector3 CurrentPosition;
     private GameObject m_Player;
@@ -22,6 +24,7 @@ public class TileManager : MonoBehaviour
         grid = gameObject.GetComponent<Grid>();
         m_Player = GameObject.Find("Player");
         m_Animator = m_Player.GetComponent<Animator>();
+        map = GameObject.Find("Map").GetComponent<Map>();
     }
     
     void Update() {
@@ -60,6 +63,7 @@ public class TileManager : MonoBehaviour
         {
             if (!m_IsMoving)
             {
+                // if(map.tilemap.GetTile(m_HighlightedTile).ToString().Equals(map.ForestTile.ToString()))
                 CurrentPosition = m_HighlightedTile + new Vector3(0.5f, 0.875f, 0);
                 StartCoroutine(Move(m_Player.transform.position, CurrentPosition));
             }
