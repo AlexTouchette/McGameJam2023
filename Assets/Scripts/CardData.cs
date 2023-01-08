@@ -10,7 +10,8 @@ public enum CardType
     MountainMove,
     Gourd,
     Plane,
-    Car
+    Car,
+    Adrenaline
 }
 public struct CardData
 {
