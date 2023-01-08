@@ -107,7 +107,7 @@ public class DeckManager : MonoBehaviour
         
 
         // Create initial deck
-        for (int i = 0; i < 1; i++)
+        for (int i = 0; i < 10; i++)
             discardPile.Add(possibleCards[CardType.Gourd]);
 
         for (int i = 0; i < 3; i++)
@@ -118,6 +118,9 @@ public class DeckManager : MonoBehaviour
 
         for (int i = 0; i < 3; i++)
             discardPile.Add(possibleCards[CardType.DesertMove]);
+
+        for (int i = 0; i < 5; i++)
+            discardPile.Add(possibleCards[CardType.Water]);
 
         Draw();
     }
@@ -187,11 +190,15 @@ public class DeckManager : MonoBehaviour
         {
             if (card.cardType == CardType.Water)
             {
+                if (hasWater)
+                {
+                    itemState.FillGourd();
+                }
                 hasWater = true;
             }
         }
 
-        if (!hasWater)
+        if (!hasWater && !itemState.UseGourd())
         {
             m_Gm.TakeDamage(1);
         }
