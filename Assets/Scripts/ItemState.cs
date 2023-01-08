@@ -14,6 +14,7 @@ public enum ItemType
 public class ItemState
 {
     Dictionary<ItemType, bool> itemState;
+    bool gourdFilled = false;
 
     public ItemState()
     {
@@ -26,7 +27,26 @@ public class ItemState
     public void ActivateItem(ItemType itemType)
     {
         itemState[itemType] = true;
-        GameObject.Find("GourdItem").GetComponent<Image>().color = new Color(255, 255, 255, 255);
+        GameObject.Find("GourdItem").GetComponent<CanvasGroup>().alpha = 1.0f;
+    }
+
+    public void FillGourd()
+    {
+        if (!itemState[ItemType.Gourd]) return;
+        gourdFilled = true;
+        GameObject.Find("GourdText").GetComponent<TMPro.TextMeshProUGUI>().text = "1";
+    }
+
+    public bool UseGourd()
+    {
+        if (!itemState[ItemType.Gourd]) return false;
+        if (gourdFilled)
+        {
+            GameObject.Find("GourdText").GetComponent<TMPro.TextMeshProUGUI>().text = "0";
+            gourdFilled = false;
+            return true;
+        }
+        return false;
     }
 
     public bool isItemActive(ItemType itemType)
