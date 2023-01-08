@@ -37,8 +37,7 @@ public class ItemState
                 break;
             case ItemType.Plane:
                 GameObject.Find("PlaneItem").GetComponent<CanvasGroup>().alpha = 1.0f;
-                // TODO: Really win
-                Debug.Log("You win!");
+                GameObject.Find("Grid").GetComponent<TileManager>().Win();
                 break;
             case ItemType.Car:
                 GameObject.Find("CarItem").GetComponent<CanvasGroup>().alpha = 1.0f;

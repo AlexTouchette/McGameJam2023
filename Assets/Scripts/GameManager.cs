@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         lootsAmount = 50;
-        m_MaxHP = 100;
+        m_MaxHP = 10;
         m_HealthPoints = m_MaxHP;
         
         healthSlider = GameObject.Find("HealthBar").GetComponent<Slider>();

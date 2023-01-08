@@ -126,7 +126,12 @@ public class TileManager : MonoBehaviour
         if (CurrentPosition.x <= 1 || CurrentPosition.x >= 99 || CurrentPosition.y <= 1 ||
             CurrentPosition.y >= 99)
         {
-            WinScreen.SetActive(true);
+            Win();
         }
+    }
+
+    public void Win()
+    {
+        WinScreen.SetActive(true);
     }
 }
