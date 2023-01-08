@@ -20,6 +20,8 @@ public class Card : MonoBehaviour, IPointerDownHandler
     Vector2 start;
     RectTransform rt;
     float lerpTime;
+    float fadeTime;
+    bool fade;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +36,13 @@ public class Card : MonoBehaviour, IPointerDownHandler
     // Update is called once per frame
     void Update()
     {
+        if (fade)
+        {
+            fadeTime += Time.deltaTime;
+            GetComponent<CanvasGroup>().alpha = 1 - fadeTime;
+            if (fadeTime > 1f)
+                Destroy(gameObject);
+        }
         if (buyable) return;
         if (rt.anchoredPosition != dest)
         {
@@ -61,6 +70,11 @@ public class Card : MonoBehaviour, IPointerDownHandler
         this.cardData = cardData;
         transform.Find("Title").GetComponent<TMPro.TextMeshProUGUI>().text = cardData.title;
         transform.Find("Description").GetComponent<TMPro.TextMeshProUGUI>().text = cardData.description;
+    }
+
+    public void Fade()
+    {
+        fade = true;
     }
 
     public void OnPointerDown(PointerEventData eventData)
