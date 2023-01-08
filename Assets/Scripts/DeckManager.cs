@@ -198,8 +198,7 @@ public class DeckManager : MonoBehaviour
         int nbOfCardsToDraw = Math.Min(handSize, handSize - hand.Count);
         hand = hand.Concat(drawPile.GetRange(drawPile.Count - nbOfCardsToDraw, nbOfCardsToDraw)).ToList();
         drawPile.RemoveRange(drawPile.Count - nbOfCardsToDraw, nbOfCardsToDraw);
-        CheckMovementDamage();
-        
+
         Vector2 handCentre = GameObject.Find("HandCentre").transform.localPosition;
         CalculateMovementPoints();
 
@@ -226,7 +225,7 @@ public class DeckManager : MonoBehaviour
 
         if (!hasWater && !itemState.UseGourd())
         {
-            m_Gm.TakeDamage(1);
+            m_Gm.SetHealth(-1);
         }
     }
     
@@ -305,6 +304,8 @@ public class DeckManager : MonoBehaviour
             if (cardsToRemove.Contains(drawnCard.cardData))
                 drawnCard.Fade();
         }
+        
+        CheckMovementDamage();
     }
 
     void UpdateUICardCounts()
