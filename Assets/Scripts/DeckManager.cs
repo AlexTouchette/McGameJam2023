@@ -115,7 +115,7 @@ public class DeckManager : MonoBehaviour
         {
             cardType = CardType.Gourd,
             title = "Gourd",
-            description = "Holds 1 water when you draw more than 1 water. Draw 3 to craft.",
+            description = "Holds 1 water when you draw more than 1 water. Draw 2 to craft.",
             image = gourdImage,
             numToCraft = 2,
             itemType = ItemType.Gourd
@@ -126,9 +126,9 @@ public class DeckManager : MonoBehaviour
         {
             cardType = CardType.Plane,
             title = "Plane",
-            description = "You win if you craft the plane. Draw 5 to craft",
+            description = "You win if you craft the plane. Draw 4 to craft",
             image = planeImage,
-            numToCraft = 5,
+            numToCraft = 4,
             itemType = ItemType.Plane
         }
         );
