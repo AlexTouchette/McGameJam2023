@@ -21,6 +21,7 @@ public class TileManager : MonoBehaviour
     DeckManager deckManager;
 
     private GameManager m_Gm;
+    private AudioManager m_Am;
     public GameObject WinScreen;
 
     void Start() {
@@ -29,6 +30,7 @@ public class TileManager : MonoBehaviour
         m_Player = GameObject.Find("Player");
         m_Animator = m_Player.GetComponent<Animator>();
         m_Gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        m_Am = GameObject.Find("Audio").GetComponent<AudioManager>();
     }
     
     void Update() {
@@ -82,6 +84,7 @@ public class TileManager : MonoBehaviour
                     deckManager.UpdateUIMovementPoints();
                     CurrentPosition = m_HighlightedTile + new Vector3(0.5f, 0.875f, 0);
                     StartCoroutine(Move(m_Player.transform.position, CurrentPosition));
+                    m_Am.CheckWaterDistance();
                 } 
                 else if(deckManager.itemState.UseCar())
                 {

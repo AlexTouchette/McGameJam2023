@@ -32,6 +32,14 @@ public class DeckManager : MonoBehaviour
     TMPro.TextMeshProUGUI desertMovementPointsText;
 
     public Sprite waterImage;
+    public Sprite macheteImage;
+    public Sprite climbingShoesImage;
+    public Sprite cactusImage;
+    public Sprite gourdImage;
+    public Sprite planeImage;
+    public Sprite carImage;
+    public Sprite adrenalineImage;
+    
 
     public Tilemap LootTileMap;
     private TileManager m_Tm;
@@ -73,6 +81,7 @@ public class DeckManager : MonoBehaviour
             cardType = CardType.JungleMove,
             title = "Hack and slash",
             description = "Move through a jungle space. So many vines.",
+            image = macheteImage,
             numToCraft = 0,
             itemType = ItemType.None
         }
@@ -83,6 +92,7 @@ public class DeckManager : MonoBehaviour
             cardType = CardType.MountainMove,
             title = "Climb",
             description = "Move in mountain terrain. Do you like bouldering?",
+            image = climbingShoesImage,
             numToCraft = 0,
             itemType = ItemType.None
         }
@@ -93,6 +103,7 @@ public class DeckManager : MonoBehaviour
             cardType = CardType.DesertMove,
             title = "Take a walk",
             description = "Take a stroll in the desert.",
+            image = cactusImage,
             numToCraft = 0,
             itemType = ItemType.None
         }
@@ -102,7 +113,8 @@ public class DeckManager : MonoBehaviour
         {
             cardType = CardType.Gourd,
             title = "Gourd",
-            description = "Holds 1 water when you draw more than 1 water. Draw 2 to craft.",
+            description = "Holds 1 water when you draw more than 1 water. Draw 3 to craft.",
+            image = gourdImage,
             numToCraft = 2,
             itemType = ItemType.Gourd
         }
@@ -112,7 +124,8 @@ public class DeckManager : MonoBehaviour
         {
             cardType = CardType.Plane,
             title = "Plane",
-            description = "You win if you craft the plane. Draw 4 to craft",
+            description = "You win if you craft the plane. Draw 5 to craft",
+            image = planeImage,
             numToCraft = 5,
             itemType = ItemType.Plane
         }
@@ -123,6 +136,7 @@ public class DeckManager : MonoBehaviour
             cardType = CardType.Car,
             title = "Car",
             description = "The car lets you move 3 spaces in any terrain type. Draw 3 to craft",
+            image = carImage,
             numToCraft = 3,
             itemType = ItemType.Car
         }
@@ -133,6 +147,7 @@ public class DeckManager : MonoBehaviour
             cardType = CardType.Adrenaline,
             title = "Adrenaline",
             description = "Draw 2 more card per turn. Draw 3 to craft",
+            image = adrenalineImage,
             numToCraft = 3,
             itemType = ItemType.Adrenaline
         }
