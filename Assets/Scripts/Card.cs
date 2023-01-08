@@ -32,6 +32,8 @@ public class Card : MonoBehaviour, IPointerDownHandler
 
         rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, cardWidth);
         rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, cardHeight);
+
+        transform.localScale = new Vector3(0, 0, transform.localScale.z);
     }
 
     // Update is called once per frame
