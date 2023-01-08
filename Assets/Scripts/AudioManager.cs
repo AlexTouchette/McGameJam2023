@@ -23,38 +23,21 @@ public class AudioManager : MonoBehaviour
 
     public void CheckWaterDistance()
     {
-        switch (wavesIsPlaying)
-        {
-            case true:
-                if (m_Tm.CurrentPosition.x <= 10 || m_Tm.CurrentPosition.x >= 89 || m_Tm.CurrentPosition.y <= 10
-                    || m_Tm.CurrentPosition.y >= 89)
-                {
-                    break;
-                }
-                else
-                {
-                    if (desertIsPlaying)
-                    {
-                        
-                    }
-                }
-                break;
-            case false:
-                break;
-                
-        }
         if ((m_Tm.CurrentPosition.x <= 10 || m_Tm.CurrentPosition.x >= 89 || m_Tm.CurrentPosition.y <= 10 
              || m_Tm.CurrentPosition.y >= 89) && !wavesIsPlaying)
         {
             desert.Stop();
             waves.Play();
             wavesIsPlaying = true;
+            desertIsPlaying = false;
         }
-        else
+        else if(((m_Tm.CurrentPosition.x > 10 && m_Tm.CurrentPosition.x < 89) || (m_Tm.CurrentPosition.y > 10 
+                 && m_Tm.CurrentPosition.y < 89)) && !desertIsPlaying)
         {
             desert.Play();
             waves.Stop();
             wavesIsPlaying = false;
+            desertIsPlaying = true;
         }
     }
 }

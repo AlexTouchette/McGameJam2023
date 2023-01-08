@@ -59,6 +59,8 @@ public class GameManager : MonoBehaviour
 
     private Slider healthSlider;
 
+    public GameObject DeathScreen;
+
     
     // Start is called before the first frame update
     void Start()
@@ -212,7 +214,7 @@ public class GameManager : MonoBehaviour
         m_HealthPoints += value;
         if (m_HealthPoints <= 0f)
         {
-            Death();
+            DeathScreen.SetActive(true);
         } else if (m_HealthPoints >= m_MaxHP)
         {
             m_HealthPoints = m_MaxHP;
