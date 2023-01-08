@@ -16,7 +16,7 @@ public class DeckManager : MonoBehaviour
     [SerializeField] 
     CardShop cardShop;
 
-    Dictionary<CardType, CardData> possibleCards = new Dictionary<CardType, CardData>();
+    public Dictionary<CardType, CardData> possibleCards = new Dictionary<CardType, CardData>();
     [HideInInspector] public Dictionary<string, int> movementPoints = new Dictionary<string, int>();
 
     List<CardData> drawPile = new List<CardData>();
@@ -98,7 +98,7 @@ public class DeckManager : MonoBehaviour
         {
             cardType = CardType.Gourd,
             title = "Gourd",
-            description = "Holds 1 water when you draw more than 1 water. Draw 3 to craft.",
+            description = "Holds 1 water when you draw more than 1 water. Draw 2 to craft.",
             numToCraft = 2,
             itemType = ItemType.Gourd
         }
@@ -108,7 +108,7 @@ public class DeckManager : MonoBehaviour
         {
             cardType = CardType.Plane,
             title = "Plane",
-            description = "You win if you craft the plane. Draw 5 to craft",
+            description = "You win if you craft the plane. Draw 4 to craft",
             numToCraft = 5,
             itemType = ItemType.Plane
         }
@@ -134,19 +134,24 @@ public class DeckManager : MonoBehaviour
         }
         );
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 1; i++)
             discardPile.Add(possibleCards[CardType.JungleMove]);
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 2; i++)
             discardPile.Add(possibleCards[CardType.MountainMove]);
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 4; i++)
             discardPile.Add(possibleCards[CardType.DesertMove]);
 
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 1; i++)
             discardPile.Add(possibleCards[CardType.Water]);
 
         Draw();
+    }
+
+    public List<CardData> GetAllHeldCards()
+    {
+        return drawPile.Concat(hand).Concat(discardPile).ToList();
     }
 
     void Shuffle()
@@ -161,6 +166,8 @@ public class DeckManager : MonoBehaviour
 
     public void Draw()
     {
+        if (cardShop.gameObject.activeSelf) return;
+
         movementPoints["MountainTile"] = 0;
         movementPoints["DesertTile"] = 0;
         movementPoints["JungleTile"] = 0;

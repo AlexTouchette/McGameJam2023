@@ -70,6 +70,12 @@ public class TileManager : MonoBehaviour
             {
                 //Debug.Log(tileString);
                 // TODO: premi�re partie du OR � enlever quand il n'y aura que 3 bi�mes
+                if (!deckManager.movementPoints.ContainsKey(tileString))
+                {
+                    Win();
+                    return;
+                }
+                    
                 if(deckManager.movementPoints[tileString] > 0)
                 {
                     deckManager.movementPoints[tileString]--;
@@ -81,7 +87,6 @@ public class TileManager : MonoBehaviour
                 {
                     CurrentPosition = m_HighlightedTile + new Vector3(0.5f, 0.875f, 0);
                     StartCoroutine(Move(m_Player.transform.position, CurrentPosition));
-                    CheckWin();
                 }
             }
         }

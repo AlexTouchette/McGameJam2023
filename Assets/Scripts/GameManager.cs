@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
     public Tilemap tilemap;
     public Tilemap borderTilemap;
 
+    [SerializeField]
     public int lootsAmount;
 
     private float m_HealthPoints;
@@ -62,7 +63,6 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        lootsAmount = 50;
         m_MaxHP = 10;
         m_HealthPoints = m_MaxHP;
         
