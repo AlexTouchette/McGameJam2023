@@ -8,13 +8,16 @@ using UnityEngine.UI;
 public enum ItemType
 {
     None,
-    Gourd
+    Gourd,
+    Plane,
+    Car
 }
 
 public class ItemState
 {
     Dictionary<ItemType, bool> itemState;
     bool gourdFilled = false;
+    int carCharges = 0;
 
     public ItemState()
     {
@@ -27,7 +30,24 @@ public class ItemState
     public void ActivateItem(ItemType itemType)
     {
         itemState[itemType] = true;
-        GameObject.Find("GourdItem").GetComponent<CanvasGroup>().alpha = 1.0f;
+        switch(itemType)
+        {
+            case ItemType.Gourd:
+                GameObject.Find("GourdItem").GetComponent<CanvasGroup>().alpha = 1.0f;
+                break;
+            case ItemType.Plane:
+                GameObject.Find("PlaneItem").GetComponent<CanvasGroup>().alpha = 1.0f;
+                // TODO: Really win
+                Debug.Log("You win!");
+                break;
+            case ItemType.Car:
+                GameObject.Find("CarItem").GetComponent<CanvasGroup>().alpha = 1.0f;
+                RefillCar();
+                break;
+            default:
+                break;
+        }
+        
     }
 
     public void FillGourd()
@@ -47,6 +67,25 @@ public class ItemState
             return true;
         }
         return false;
+    }
+
+    public bool UseCar()
+    {
+        if (!itemState[ItemType.Car]) return false;
+        if (carCharges > 0)
+        {
+            carCharges--;
+            GameObject.Find("CarText").GetComponent<TMPro.TextMeshProUGUI>().text = carCharges.ToString();
+            return true;
+        }
+        return false;
+    }
+
+    public void RefillCar()
+    {
+        if (!itemState[ItemType.Car]) return;
+        carCharges = 3;
+        GameObject.Find("CarText").GetComponent<TMPro.TextMeshProUGUI>().text = carCharges.ToString();
     }
 
     public bool isItemActive(ItemType itemType)

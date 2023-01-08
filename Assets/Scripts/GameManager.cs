@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    public void GenerateMap ()
+    public void GenerateMap()
     {
         // height map
         heightMap = NoiseGenerator.Generate(width, height, scale, heightWaves, offset);
