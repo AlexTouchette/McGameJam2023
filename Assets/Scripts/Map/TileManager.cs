@@ -149,6 +149,7 @@ public class TileManager : MonoBehaviour
 
     public void Win()
     {
+        deckManager.ResetDeck();
         WinScreen.SetActive(true);
         GameObject.Find("WinText").GetComponent<TMPro.TextMeshProUGUI>().text =
             "You escaped! Number of turns: " + deckManager.nbOfTurns.ToString();

@@ -156,6 +156,20 @@ public class DeckManager : MonoBehaviour
         }
         );
 
+        ResetDeck();
+
+        //for (int i = 0; i < 20; i++)
+        //    discardPile.Add(possibleCards[CardType.Adrenaline]);
+
+        Draw();
+    }
+
+    public void ResetDeck()
+    {
+        drawPile.Clear();
+        hand.Clear();
+        discardPile.Clear();
+
         for (int i = 0; i < 1; i++)
             discardPile.Add(possibleCards[CardType.JungleMove]);
 
@@ -167,11 +181,6 @@ public class DeckManager : MonoBehaviour
 
         for (int i = 0; i < 1; i++)
             discardPile.Add(possibleCards[CardType.Water]);
-
-        //for (int i = 0; i < 20; i++)
-        //    discardPile.Add(possibleCards[CardType.Adrenaline]);
-
-        Draw();
     }
 
     public List<CardData> GetAllHeldCards()
