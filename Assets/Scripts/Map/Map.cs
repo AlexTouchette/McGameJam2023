@@ -37,12 +37,8 @@ using UnityEngine;
     public Tilemap borderTilemap;
     
     [SerializeField] private Tile DesertTile = null;
-    [SerializeField] private Tile ForestTile = null;
-    [SerializeField] private Tile GrasslandTile = null;
     [SerializeField] private Tile JungleTile = null;
     [SerializeField] private Tile MountainsTile = null;
-    [SerializeField] private Tile OceanTile = null;
-    [SerializeField] private Tile TundraTile = null;
     [SerializeField] private Tile BorderTile = null;
 
     private void Start()
@@ -75,20 +71,8 @@ using UnityEngine;
                     case "Mountains":
                         tilemap.SetTile(tilePosition, MountainsTile);
                         break;
-                    case "Ocean":
-                        tilemap.SetTile(tilePosition, OceanTile);
-                        break;
-                    case "Grassland":
-                        tilemap.SetTile(tilePosition, GrasslandTile);
-                        break;
-                    case "Forest":
-                        tilemap.SetTile(tilePosition, ForestTile);
-                        break;
                     case "Jungle":
                         tilemap.SetTile(tilePosition, JungleTile);
-                        break;
-                    case "Tundra":
-                        tilemap.SetTile(tilePosition, TundraTile);
                         break;
                     default:
                         break;

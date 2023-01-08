@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6d32eb2b99d6494fbb2dfa234a8d394, type: 3}
   m_Name: Jungle
   m_EditorClassIdentifier: 
-  tiles:
-  - {fileID: 1469388889, guid: d9e06b32f35c66c439e91e1aa7e0050e, type: 3}
-  minHeight: 0.3
+  minHeight: 0.2
   minMoisture: 0.5
   minHeat: 0.62

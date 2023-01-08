@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Card
+  - Border
+  - Loots
+  - Floor
+  - Interactives
   layers:
   - Default
   - TransparentFX

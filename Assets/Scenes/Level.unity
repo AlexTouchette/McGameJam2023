@@ -902,7 +902,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactiveMap: {fileID: 1101678483}
   hoverTile: {fileID: 11400000, guid: bb0e9bd24253d414c92a73d71b90a4fc, type: 2}
-  currentPosition: {x: 0, y: 0, z: 0}
+  CurrentPosition: {x: 0, y: 0, z: 0}
 --- !u!156049354 &593471444
 Grid:
   m_ObjectHideFlags: 0
@@ -1176,7 +1176,7 @@ GameObject:
   - component: {fileID: 1101678484}
   m_Layer: 0
   m_Name: Interactive
-  m_TagString: Untagged
+  m_TagString: Interactives
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1498,7 +1498,7 @@ GameObject:
   - component: {fileID: 1250942814}
   m_Layer: 0
   m_Name: Border
-  m_TagString: Untagged
+  m_TagString: Border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1628,7 +1628,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1462836340
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1790,7 +1790,7 @@ GameObject:
   - component: {fileID: 1503913570}
   m_Layer: 0
   m_Name: Loots
-  m_TagString: Untagged
+  m_TagString: Loots
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1910,7 +1910,7 @@ GameObject:
   - component: {fileID: 1874310100}
   m_Layer: 0
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2334,7 +2334,7 @@ MonoBehaviour:
   - seed: 56
     frequency: 0.05
     amplitude: 1
-  - seed: 199.36
+  - seed: 1
     frequency: 0.1
     amplitude: 0.5
   heightDebugColors:
@@ -2367,7 +2367,7 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   moistureWaves:
-  - seed: 621
+  - seed: 932
     frequency: 0.03
     amplitude: 1
   moistureDebugColors:
@@ -2400,10 +2400,10 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   heatWaves:
-  - seed: 318.6
+  - seed: 100
     frequency: 0.04
     amplitude: 1
-  - seed: 329.7
+  - seed: 50
     frequency: 0.02
     amplitude: 0.5
   heatDebugColors:
@@ -2438,12 +2438,8 @@ MonoBehaviour:
   tilemap: {fileID: 1874310099}
   borderTilemap: {fileID: 1250942813}
   DesertTile: {fileID: 11400000, guid: 1f520627640f9fa4791f8ad238acfc4a, type: 2}
-  ForestTile: {fileID: 11400000, guid: 5e781675027ee014892efa6abb934693, type: 2}
-  GrasslandTile: {fileID: 11400000, guid: 589178ceef7fe054db8cd2f2d1c10a37, type: 2}
   JungleTile: {fileID: 11400000, guid: b814935b0d3ed754ca59ffd3bf64b027, type: 2}
   MountainsTile: {fileID: 11400000, guid: 6e0d0f0b14df00446a69fe5c1852ae9f, type: 2}
-  OceanTile: {fileID: 11400000, guid: 3a39f1943cd21ab4696579e2ebe77e44, type: 2}
-  TundraTile: {fileID: 11400000, guid: a6797ab467350314fb079cb886f54c05, type: 2}
   BorderTile: {fileID: 11400000, guid: 0e29283212bdaa7468693d4c1086d726, type: 2}
 --- !u!4 &2023876075
 Transform:
