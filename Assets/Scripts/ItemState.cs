@@ -10,7 +10,8 @@ public enum ItemType
     None,
     Gourd,
     Plane,
-    Car
+    Car,
+    Adrenaline
 }
 
 public class ItemState

@@ -128,27 +128,27 @@ public class DeckManager : MonoBehaviour
         }
         );
 
-        // Create initial deck
-        //for (int i = 0; i < 10; i++)
-        //    discardPile.Add(possibleCards[CardType.Gourd]);
+        possibleCards.Add(CardType.Adrenaline, new CardData()
+        {
+            cardType = CardType.Adrenaline,
+            title = "Car",
+            description = "Draw 2 more card per turn. Draw 3 to craft",
+            numToCraft = 3,
+            itemType = ItemType.Adrenaline
+        }
+        );
 
-        //for (int i = 0; i < 3; i++)
-        //    discardPile.Add(possibleCards[CardType.JungleMove]);
+        for (int i = 0; i < 3; i++)
+            discardPile.Add(possibleCards[CardType.JungleMove]);
 
-        //for (int i = 0; i < 3; i++)
-        //    discardPile.Add(possibleCards[CardType.MountainMove]);
+        for (int i = 0; i < 3; i++)
+            discardPile.Add(possibleCards[CardType.MountainMove]);
 
-        //for (int i = 0; i < 3; i++)
-        //    discardPile.Add(possibleCards[CardType.DesertMove]);
+        for (int i = 0; i < 3; i++)
+            discardPile.Add(possibleCards[CardType.DesertMove]);
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 2; i++)
             discardPile.Add(possibleCards[CardType.Water]);
-
-        //for (int i = 0; i < 5; i++)
-        //    discardPile.Add(possibleCards[CardType.Plane]);
-
-        for (int i = 0; i < 5; i++)
-            discardPile.Add(possibleCards[CardType.Car]);
 
         Draw();
     }
@@ -187,13 +187,15 @@ public class DeckManager : MonoBehaviour
         if (drawPile.Count == 0) Shuffle();
 
         hand = new List<CardData>();
-        if(handSize > drawPile.Count)
+
+        int realHandSize = itemState.isItemActive(ItemType.Adrenaline) ? handSize + 2 : handSize;
+        if(realHandSize > drawPile.Count)
         {
             hand = drawPile.GetRange(0, drawPile.Count);
             drawPile.RemoveRange(0, drawPile.Count);
             Shuffle();
         }
-        int nbOfCardsToDraw = Math.Min(handSize, handSize - hand.Count);
+        int nbOfCardsToDraw = Math.Min(realHandSize, realHandSize - hand.Count);
         hand = hand.Concat(drawPile.GetRange(drawPile.Count - nbOfCardsToDraw, nbOfCardsToDraw)).ToList();
         drawPile.RemoveRange(drawPile.Count - nbOfCardsToDraw, nbOfCardsToDraw);
 
