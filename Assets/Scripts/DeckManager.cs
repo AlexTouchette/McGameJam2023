@@ -67,6 +67,9 @@ public class DeckManager : MonoBehaviour
     void Shuffle()
     {
         // TODO: validate this is truly random
+        foreach (CardData cardData in drawPile)
+            discardPile.Add(cardData);
+        drawPile.Clear();
         drawPile = discardPile.OrderBy(a => UnityEngine.Random.Range(0, int.MaxValue)).ToList();
         discardPile.Clear();
     }
@@ -83,41 +86,44 @@ public class DeckManager : MonoBehaviour
         }
 
         for (int i = 0; i < hand.Count; i++)
-        {
             discardPile.Add(hand[i]);
-        }
         hand.Clear();
 
         if (drawPile.Count == 0) Shuffle();
 
-        int nbOfCardsToDraw = Math.Min(handSize, drawPile.Count);
-        List<CardData> cardsToDraw = drawPile.GetRange(drawPile.Count - nbOfCardsToDraw, nbOfCardsToDraw);
+        hand = new List<CardData>();
+        if(handSize > drawPile.Count)
+        {
+            hand = drawPile.GetRange(0, drawPile.Count);
+            drawPile.RemoveRange(0, drawPile.Count);
+            Shuffle();
+        }
+        int nbOfCardsToDraw = Math.Min(handSize, handSize - hand.Count);
+        hand = hand.Concat(drawPile.GetRange(drawPile.Count - nbOfCardsToDraw, nbOfCardsToDraw)).ToList();
         drawPile.RemoveRange(drawPile.Count - nbOfCardsToDraw, nbOfCardsToDraw);
+        
 
         Vector2 handCentre = GameObject.Find("HandCentre").transform.localPosition;
-        StartCoroutine(DrawCards(0.2f, nbOfCardsToDraw, cardsToDraw, handCentre));
+        StartCoroutine(DrawCards(0.2f, hand, handCentre));
 
         GameObject.Find("DrawCardCount").GetComponent<TMPro.TextMeshProUGUI>().text = drawPile.Count.ToString();
         GameObject.Find("DiscardCardCount").GetComponent<TMPro.TextMeshProUGUI>().text = discardPile.Count.ToString();
     }
 
-    IEnumerator DrawCards(float time, int nbOfCardsToDraw, List<CardData> cardsToDraw, Vector2 handCentre)
+    IEnumerator DrawCards(float time, List<CardData> cardsToDraw, Vector2 handCentre)
     {
-        float initialXCardPos = handCentre.x - (float)nbOfCardsToDraw / 2 * Card.cardWidth + (float)Card.cardWidth / 2;
+        float initialXCardPos = handCentre.x - (float)cardsToDraw.Count / 2 * Card.cardWidth + (float)Card.cardWidth / 2;
 
-        for (int i = 0; i < nbOfCardsToDraw; i++)
+        for (int i = 0; i < cardsToDraw.Count; i++)
         {
             yield return new WaitForSeconds(time);
             GameObject card = Instantiate(cardPrefab, GameObject.Find("UI").transform);
             card.GetComponent<Card>().SetCardData(cardsToDraw[i]);
-            hand.Add(cardsToDraw[i]);
 
             RectTransform rt = card.GetComponent<RectTransform>();
             rt.anchoredPosition = GameObject.Find("DrawPile").transform.localPosition;
             card.GetComponent<Card>().dest = new Vector2(initialXCardPos + i * Card.cardWidth, handCentre.y);
         }
-
-        cardsToDraw.Clear();
     }
 
     public CardData GetRandomCard(List<CardType> excludedTypes)
