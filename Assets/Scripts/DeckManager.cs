@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class DeckManager : MonoBehaviour
 {
@@ -24,6 +25,9 @@ public class DeckManager : MonoBehaviour
     TMPro.TextMeshProUGUI drawPileCount;
     TMPro.TextMeshProUGUI discardPileCount;
 
+    public Tilemap LootTileMap;
+    private TileManager m_Tm;
+
     ItemState itemState = new ItemState();
 
     // Start is called before the first frame update
@@ -43,6 +47,8 @@ public class DeckManager : MonoBehaviour
         }
         );
 
+        m_Tm = GameObject.Find("Grid").GetComponent<TileManager>();
+            
         possibleCards.Add(CardType.JungleMove, new CardData()
         {
             cardType = CardType.JungleMove,
@@ -210,5 +216,6 @@ public class DeckManager : MonoBehaviour
     {
         cardShop.gameObject.SetActive(true);
         cardShop.GenerateNewCards(2);
+        LootTileMap.SetTile(Vector3Int.FloorToInt(m_Tm.CurrentPosition), null);
     }
 }
