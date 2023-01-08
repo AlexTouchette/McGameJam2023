@@ -168,8 +168,8 @@ public class DeckManager : MonoBehaviour
         for (int i = 0; i < 1; i++)
             discardPile.Add(possibleCards[CardType.Water]);
 
-        for (int i = 0; i < 20; i++)
-            discardPile.Add(possibleCards[CardType.Adrenaline]);
+        //for (int i = 0; i < 20; i++)
+        //    discardPile.Add(possibleCards[CardType.Adrenaline]);
 
         Draw();
     }

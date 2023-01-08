@@ -44,6 +44,9 @@ public class ItemState
                 GameObject.Find("CarItem").GetComponent<CanvasGroup>().alpha = 1.0f;
                 RefillCar();
                 break;
+            case ItemType.Adrenaline:
+                GameObject.Find("AdrenalineItem").GetComponent<CanvasGroup>().alpha = 1.0f;
+                break;
             default:
                 break;
         }
