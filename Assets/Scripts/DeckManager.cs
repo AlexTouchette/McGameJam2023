@@ -17,6 +17,7 @@ public class DeckManager : MonoBehaviour
     CardShop cardShop;
 
     Dictionary<CardType, CardData> possibleCards = new Dictionary<CardType, CardData>();
+    [HideInInspector] public Dictionary<string, int> movementPoints = new Dictionary<string, int>();
 
     List<CardData> drawPile = new List<CardData>();
     List<CardData> hand = new List<CardData>();
@@ -24,6 +25,10 @@ public class DeckManager : MonoBehaviour
 
     TMPro.TextMeshProUGUI drawPileCount;
     TMPro.TextMeshProUGUI discardPileCount;
+
+    TMPro.TextMeshProUGUI jungleMovementPointsText;
+    TMPro.TextMeshProUGUI mountainsMovementPointsText;
+    TMPro.TextMeshProUGUI desertMovementPointsText;
 
     public Tilemap LootTileMap;
     private TileManager m_Tm;
@@ -33,8 +38,16 @@ public class DeckManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        movementPoints.Add("MoutainsTile", 0);
+        movementPoints.Add("DesertTile", 0);
+        movementPoints.Add("JungleTile", 0);
+
         drawPileCount = GameObject.Find("DrawCardCount").GetComponent<TMPro.TextMeshProUGUI>();
         discardPileCount = GameObject.Find("DiscardCardCount").GetComponent<TMPro.TextMeshProUGUI>();
+
+        jungleMovementPointsText = GameObject.Find("JungleMovementText").GetComponent<TMPro.TextMeshProUGUI>();
+        mountainsMovementPointsText = GameObject.Find("MountainsMovementText").GetComponent<TMPro.TextMeshProUGUI>();
+        desertMovementPointsText = GameObject.Find("DesertMovementText").GetComponent<TMPro.TextMeshProUGUI>();
 
         // This is a game jam lord please forgive me
         possibleCards.Add(CardType.Water, new CardData()
@@ -59,6 +72,26 @@ public class DeckManager : MonoBehaviour
         }
         );
 
+        possibleCards.Add(CardType.MountainMove, new CardData()
+        {
+            cardType = CardType.MountainMove,
+            title = "Climb",
+            description = "Move in mountain terrain. Do you like bouldering?",
+            numToCraft = 0,
+            itemType = ItemType.None
+        }
+        );
+
+        possibleCards.Add(CardType.DesertMove, new CardData()
+        {
+            cardType = CardType.DesertMove,
+            title = "Take a walk",
+            description = "Take a stroll in the desert.",
+            numToCraft = 0,
+            itemType = ItemType.None
+        }
+        );
+
         possibleCards.Add(CardType.Gourd, new CardData()
         {
             cardType = CardType.Gourd,
@@ -69,12 +102,20 @@ public class DeckManager : MonoBehaviour
         }
         );
 
+        
+
         // Create initial deck
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < 1; i++)
             discardPile.Add(possibleCards[CardType.Gourd]);
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 3; i++)
             discardPile.Add(possibleCards[CardType.JungleMove]);
+
+        for (int i = 0; i < 3; i++)
+            discardPile.Add(possibleCards[CardType.MountainMove]);
+
+        for (int i = 0; i < 3; i++)
+            discardPile.Add(possibleCards[CardType.DesertMove]);
 
         Draw();
     }
@@ -97,6 +138,10 @@ public class DeckManager : MonoBehaviour
 
     public void Draw()
     {
+        movementPoints["MountainTile"] = 0;
+        movementPoints["DesertTile"] = 0;
+        movementPoints["JungleTile"] = 0;
+
         GameObject[] instantiatedCards = GameObject.FindGameObjectsWithTag("Card");
 
         for (int i = 0; i < instantiatedCards.Length; i++)
@@ -122,13 +167,36 @@ public class DeckManager : MonoBehaviour
         int nbOfCardsToDraw = Math.Min(handSize, handSize - hand.Count);
         hand = hand.Concat(drawPile.GetRange(drawPile.Count - nbOfCardsToDraw, nbOfCardsToDraw)).ToList();
         drawPile.RemoveRange(drawPile.Count - nbOfCardsToDraw, nbOfCardsToDraw);
-        
 
         Vector2 handCentre = GameObject.Find("HandCentre").transform.localPosition;
+        CalculateMovementPoints();
+
         StartCoroutine(DrawCards(0.2f, hand, handCentre));
 
         drawPileCount.text = drawPile.Count.ToString();
         discardPileCount.text = discardPile.Count.ToString();
+    }
+
+    void CalculateMovementPoints()
+    {
+        foreach(CardData cardData in hand)
+        {
+            switch(cardData.cardType)
+            {
+                case CardType.JungleMove:
+                    movementPoints["JungleTile"]++;
+                    break;
+                case CardType.MountainMove:
+                    movementPoints["MountainTile"]++;
+                    break;
+                case CardType.DesertMove:
+                    movementPoints["DesertTile"]++;
+                    break;
+                default:
+                    break;
+            }
+        }
+        UpdateUIMovementPoints();
     }
 
     List<CardData> CheckCraftedItems()
@@ -190,6 +258,13 @@ public class DeckManager : MonoBehaviour
     {
         discardPileCount.text = discardPile.Count.ToString();
         drawPileCount.text = drawPile.Count.ToString();
+    }
+
+    public void UpdateUIMovementPoints()
+    {
+        jungleMovementPointsText.text = "Jungle: " + movementPoints["JungleTile"].ToString();
+        mountainsMovementPointsText.text = "Mountains: " + movementPoints["MountainTile"].ToString();
+        desertMovementPointsText.text = "Desert: " + movementPoints["DesertTile"].ToString();
     }
 
     public CardData GetRandomCard(List<CardType> excludedTypes)

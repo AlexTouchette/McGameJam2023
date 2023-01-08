@@ -13,16 +13,21 @@ public class TileManager : MonoBehaviour
 
     private Vector3Int previousMousePos = new Vector3Int();
 
+    private Map map;
+
     private Vector3Int m_HighlightedTile;
     public Vector3 CurrentPosition;
     private GameObject m_Player;
     private Animator m_Animator;
     private bool m_IsMoving;
+    DeckManager deckManager;
 
     void Start() {
+        deckManager = GameObject.Find("DeckManager").GetComponent<DeckManager>();
         grid = gameObject.GetComponent<Grid>();
         m_Player = GameObject.Find("Player");
         m_Animator = m_Player.GetComponent<Animator>();
+        map = GameObject.Find("Map").GetComponent<Map>();
     }
     
     void Update() {
@@ -59,10 +64,21 @@ public class TileManager : MonoBehaviour
         // Left mouse click -> move to tile
         if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
         {
+            string tileString = map.tilemap.GetTile(m_HighlightedTile).ToString().Split(" ")[0];
+            Debug.Log(tileString);
             if (!m_IsMoving)
             {
-                CurrentPosition = m_HighlightedTile + new Vector3(0.5f, 0.875f, 0);
-                StartCoroutine(Move(m_Player.transform.position, CurrentPosition));
+                // TODO: première partie du OR à enlever quand il n'y aura que 3 biômes
+                if(!deckManager.movementPoints.ContainsKey(tileString) || deckManager.movementPoints[tileString] > 0)
+                {
+                    if(deckManager.movementPoints.ContainsKey(tileString))
+                    {
+                        deckManager.movementPoints[tileString]--;
+                        deckManager.UpdateUIMovementPoints();
+                    }
+                    CurrentPosition = m_HighlightedTile + new Vector3(0.5f, 0.875f, 0);
+                    StartCoroutine(Move(m_Player.transform.position, CurrentPosition));
+                }
             }
         }
     }

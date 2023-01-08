@@ -6,6 +6,8 @@ public enum CardType
 {
     Water,
     JungleMove,
+    DesertMove,
+    MountainMove,
     Gourd
 }
 public struct CardData
