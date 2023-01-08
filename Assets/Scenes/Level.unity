@@ -889,7 +889,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 6
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1013,7 +1013,7 @@ Transform:
   - {fileID: 1101678485}
   - {fileID: 1874310101}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &685043587
 GameObject:
@@ -1045,6 +1045,125 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Loots: {fileID: 11400000, guid: 4a287ff21f4c8d74eaadb6f6f3608979, type: 2}
+  width: 100
+  height: 100
+  scale: 1
+  offset: {x: 0, y: 0}
+  heightWaves:
+  - seed: 56
+    frequency: 0.05
+    amplitude: 1
+  - seed: 200
+    frequency: 0.01
+    amplitude: 0.5
+  heightDebugColors:
+    serializedVersion: 2
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  moistureWaves:
+  - seed: 621
+    frequency: 0.03
+    amplitude: 1
+  moistureDebugColors:
+    serializedVersion: 2
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  heatWaves:
+  - seed: 318.6
+    frequency: 0.04
+    amplitude: 1
+  - seed: 329.7
+    frequency: 0.02
+    amplitude: 0.5
+  heatDebugColors:
+    serializedVersion: 2
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  DesertTile: {fileID: 11400000, guid: 7bab56c33923d8a4c9da60dc562d52be, type: 2}
+  JungleTile: {fileID: 11400000, guid: 8357189dd7607e24f86cb4e46e1b11d0, type: 2}
+  MountainsTile: {fileID: 11400000, guid: f03bafc0210782547b15b5ed45262a4a, type: 2}
+  BorderTile: {fileID: 11400000, guid: 217f017f11140294094f8b04fa35158d, type: 2}
+  biomes:
+  - {fileID: 11400000, guid: b9f3d7a37f511ee46af5022710760c2c, type: 2}
+  - {fileID: 11400000, guid: 99b871b91f49b1748bfe18f270fa451c, type: 2}
+  - {fileID: 11400000, guid: cf2cd41daac92cb4b9bf95eb7a237c7c, type: 2}
+  tilemap: {fileID: 1874310099}
+  borderTilemap: {fileID: 1250942813}
   lootsAmount: 100
 --- !u!4 &685043589
 Transform:
@@ -1059,7 +1178,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &736325029
 GameObject:
@@ -1107,7 +1226,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &884074940
 GameObject:
@@ -1565,7 +1684,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1129262255
 GameObject:
@@ -1930,8 +2049,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1470580003
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -2071,7 +2190,7 @@ RectTransform:
   - {fileID: 1186763926}
   - {fileID: 884074941}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2483,15 +2602,39 @@ Tilemap:
   m_Enabled: 1
   m_Tiles: {}
   m_AnimatedTiles: {}
-  m_TileAssetArray: []
-  m_TileSpriteArray: []
-  m_TileMatrixArray: []
-  m_TileColorArray: []
+  m_TileAssetArray:
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  m_TileSpriteArray:
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  m_TileMatrixArray:
+  - m_RefCount: 0
+    m_Data:
+      e00: -2.141178e-26
+      e01: 0
+      e02: -6.225783e+19
+      e03: -6.225783e+19
+      e10: 8.93e-43
+      e11: 0
+      e12: 8.93e-43
+      e13: 8.93e-43
+      e20: 252181500
+      e21: 1e-45
+      e22: 6.0133425e-19
+      e23: 3.7578176e+19
+      e30: 4.5904e-41
+      e31: 0
+      e32: 8.94e-43
+      e33: 8.97e-43
+  m_TileColorArray:
+  - m_RefCount: 0
+    m_Data: {r: NaN, g: NaN, b: NaN, a: NaN}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: 0, y: 0, z: 0}
-  m_Size: {x: 0, y: 0, z: 1}
+  m_Size: {x: 51, y: 50, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -2845,172 +2988,3 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1910006201}
   m_CullTransparentMesh: 1
---- !u!1 &2023876073
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2023876075}
-  - component: {fileID: 2023876074}
-  m_Layer: 0
-  m_Name: Map
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2023876074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2023876073}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce770d7a57647464ebcae4d2cfb0e69c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  biomes:
-  - {fileID: 11400000, guid: b9f3d7a37f511ee46af5022710760c2c, type: 2}
-  - {fileID: 11400000, guid: 530e981c5267ccc48a528ab1df715cb3, type: 2}
-  - {fileID: 11400000, guid: 77a108ee54e95b54bbf222abbe0c4333, type: 2}
-  - {fileID: 11400000, guid: 99b871b91f49b1748bfe18f270fa451c, type: 2}
-  - {fileID: 11400000, guid: cf2cd41daac92cb4b9bf95eb7a237c7c, type: 2}
-  - {fileID: 11400000, guid: 51dcaf024002c294387951a4d696238c, type: 2}
-  - {fileID: 11400000, guid: f6f9c2d7177a2e9459e16ac749d9031a, type: 2}
-  tilePrefab: {fileID: 6722993040456910045, guid: 184bf91bd13715a4dbd0e8c527573456, type: 3}
-  parent: {fileID: 0}
-  width: 100
-  height: 100
-  scale: 1
-  offset: {x: 0, y: 0}
-  heightWaves:
-  - seed: 56
-    frequency: 0.05
-    amplitude: 1
-  - seed: 1
-    frequency: 0.1
-    amplitude: 0.5
-  heightDebugColors:
-    serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 65535
-    ctime2: 0
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 0
-    m_NumColorKeys: 2
-    m_NumAlphaKeys: 2
-  moistureWaves:
-  - seed: 932
-    frequency: 0.03
-    amplitude: 1
-  moistureDebugColors:
-    serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 65535
-    ctime2: 0
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 0
-    m_NumColorKeys: 2
-    m_NumAlphaKeys: 2
-  heatWaves:
-  - seed: 100
-    frequency: 0.04
-    amplitude: 1
-  - seed: 50
-    frequency: 0.02
-    amplitude: 0.5
-  heatDebugColors:
-    serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 65535
-    ctime2: 0
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 0
-    m_NumColorKeys: 2
-    m_NumAlphaKeys: 2
-  tilemap: {fileID: 1874310099}
-  borderTilemap: {fileID: 1250942813}
-  DesertTile: {fileID: 11400000, guid: 1f520627640f9fa4791f8ad238acfc4a, type: 2}
-  JungleTile: {fileID: 11400000, guid: b814935b0d3ed754ca59ffd3bf64b027, type: 2}
-  MountainsTile: {fileID: 11400000, guid: 6e0d0f0b14df00446a69fe5c1852ae9f, type: 2}
-  BorderTile: {fileID: 11400000, guid: 0e29283212bdaa7468693d4c1086d726, type: 2}
---- !u!4 &2023876075
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2023876073}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

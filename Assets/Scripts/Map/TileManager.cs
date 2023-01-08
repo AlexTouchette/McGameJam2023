@@ -13,8 +13,6 @@ public class TileManager : MonoBehaviour
 
     private Vector3Int previousMousePos = new Vector3Int();
 
-    private Map map;
-
     private Vector3Int m_HighlightedTile;
     public Vector3 CurrentPosition;
     private GameObject m_Player;
@@ -22,12 +20,14 @@ public class TileManager : MonoBehaviour
     private bool m_IsMoving;
     DeckManager deckManager;
 
+    private GameManager m_Gm;
+
     void Start() {
         deckManager = GameObject.Find("DeckManager").GetComponent<DeckManager>();
         grid = gameObject.GetComponent<Grid>();
         m_Player = GameObject.Find("Player");
         m_Animator = m_Player.GetComponent<Animator>();
-        map = GameObject.Find("Map").GetComponent<Map>();
+        m_Gm = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
     
     void Update() {
@@ -64,11 +64,10 @@ public class TileManager : MonoBehaviour
         // Left mouse click -> move to tile
         if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
         {
-            string tileString = map.tilemap.GetTile(m_HighlightedTile).ToString().Split(" ")[0];
-            Debug.Log(tileString);
+            string tileString = m_Gm.tilemap.GetTile(m_HighlightedTile).ToString().Split(" ")[0];
             if (!m_IsMoving)
             {
-                // TODO: première partie du OR à enlever quand il n'y aura que 3 biômes
+                // TODO: premiï¿½re partie du OR ï¿½ enlever quand il n'y aura que 3 biï¿½mes
                 if(!deckManager.movementPoints.ContainsKey(tileString) || deckManager.movementPoints[tileString] > 0)
                 {
                     if(deckManager.movementPoints.ContainsKey(tileString))
