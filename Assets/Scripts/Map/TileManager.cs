@@ -67,30 +67,39 @@ public class TileManager : MonoBehaviour
         // Left mouse click -> move to tile
         if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
         {
-            string tileString = m_Gm.tilemap.GetTile(m_HighlightedTile).ToString().Split(" ")[0];
-            if (!m_IsMoving)
+            try
             {
-                //Debug.Log(tileString);
-                // TODO: premi�re partie du OR � enlever quand il n'y aura que 3 bi�mes
-                if (!deckManager.movementPoints.ContainsKey(tileString))
+                string tileString = m_Gm.tilemap.GetTile(m_HighlightedTile).ToString().Split(" ")[0];
+            
+            
+                if (!m_IsMoving)
                 {
-                    Win();
-                    return;
-                }
+                    //Debug.Log(tileString);
+                    // TODO: premi�re partie du OR � enlever quand il n'y aura que 3 bi�mes
+                    //if (!deckManager.movementPoints.ContainsKey(tileString))
+                    //{
+                    //    Win();
+                    //    return;
+                    //}
                     
-                if(deckManager.movementPoints[tileString] > 0)
-                {
-                    deckManager.movementPoints[tileString]--;
-                    deckManager.UpdateUIMovementPoints();
-                    CurrentPosition = m_HighlightedTile + new Vector3(0.5f, 0.875f, 0);
-                    StartCoroutine(Move(m_Player.transform.position, CurrentPosition));
-                    m_Am.CheckWaterDistance();
-                } 
-                else if(deckManager.itemState.UseCar())
-                {
-                    CurrentPosition = m_HighlightedTile + new Vector3(0.5f, 0.875f, 0);
-                    StartCoroutine(Move(m_Player.transform.position, CurrentPosition));
+                    if(deckManager.movementPoints[tileString] > 0)
+                    {
+                        deckManager.movementPoints[tileString]--;
+                        deckManager.UpdateUIMovementPoints();
+                        CurrentPosition = m_HighlightedTile + new Vector3(0.5f, 0.875f, 0);
+                        StartCoroutine(Move(m_Player.transform.position, CurrentPosition));
+                        m_Am.CheckWaterDistance();
+                    } 
+                    else if(deckManager.itemState.UseCar())
+                    {
+                        CurrentPosition = m_HighlightedTile + new Vector3(0.5f, 0.875f, 0);
+                        StartCoroutine(Move(m_Player.transform.position, CurrentPosition));
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+                Win();
             }
         }
     }
@@ -140,8 +149,8 @@ public class TileManager : MonoBehaviour
 
     public void Win()
     {
-        GameObject.Find("WinText").GetComponent<TMPro.TextMeshProUGUI>().text = 
-            "You escaped! Number of turns: " + deckManager.nbOfTurns.ToString();
         WinScreen.SetActive(true);
+        GameObject.Find("WinText").GetComponent<TMPro.TextMeshProUGUI>().text =
+            "You escaped! Number of turns: " + deckManager.nbOfTurns.ToString();
     }
 }

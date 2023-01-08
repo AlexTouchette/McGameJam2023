@@ -148,9 +148,9 @@ public class DeckManager : MonoBehaviour
         {
             cardType = CardType.Adrenaline,
             title = "Adrenaline",
-            description = "Draw 2 more card per turn. Draw 3 to craft",
+            description = "Draw 2 more card per turn. Draw 2 to craft",
             image = adrenalineImage,
-            numToCraft = 3,
+            numToCraft = 2,
             itemType = ItemType.Adrenaline
         }
         );

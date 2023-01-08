@@ -2135,6 +2135,7 @@ MonoBehaviour:
   tilemap: {fileID: 1874310099}
   borderTilemap: {fileID: 1250942813}
   lootsAmount: 300
+  DeathScreen: {fileID: 0}
 --- !u!4 &685043589
 Transform:
   m_ObjectHideFlags: 0
